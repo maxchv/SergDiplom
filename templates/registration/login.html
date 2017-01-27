@@ -1,6 +1,20 @@
-{% extends 'landing/base_form.html' %}
+{% extends 'base.html' %}
 {% load crispy_forms_tags %}
 {% block content %}
-
-
+    <div id="register_wrapper">
+        <div class="container">
+            <section class="page_section">
+                <div class="col-lg-8 col-lg-offset-2 wow fadeInLeft delay-06s">
+                    <div class="form">
+                        <form action="" method="post">
+                            {% csrf_token %}
+                            <!-- as_p для того, чтобы каждый элемент формы был с новой строки -->
+                            {{ form|crispy }}
+                            <button type="submit" class="btn btn-primary">Логин</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
 {% endblock %}

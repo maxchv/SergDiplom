@@ -279,7 +279,7 @@ body {
 }
 
 h2 {
-    font-size: 38px;
+    font-size: 32px;
     color: #222222;
     font-family: 'Raleway', sans-serif;
     font-weight: normal;
@@ -995,7 +995,8 @@ background-position-y: 70px;
 	padding-left:0px;
 }
 .about-us p{
-	/*font-size: 0.9375em;*/
+    text-align: justify;
+	font-size: 1.1em;
 	line-height: 1.625em;
 	padding: 15px 0;
 }
@@ -1381,10 +1382,17 @@ transition: all .3s;
     color: #222;
 }
 
+#register_wrapper {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    padding-top: 60px;
+}
+
 /* Footer
 ---------------------------------*/
 
-.footer_wrapper {
+.footer_wrapper, #register_wrapper {
     background: #000000;
 }
 
@@ -2522,4 +2530,19 @@ section#experience {
     height: 100px;
     margin: 0 auto;
     border-radius: 100px;
+}
+
+
+#registration {
+    z-index: 5000;
+    opacity: 0.5;
+    background: black;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+}
+
+.btn-primary {
+    background-image: linear-gradient(to bottom,#272e33 0,#41474D 100%);
+    border-color: #1e2023;
 }

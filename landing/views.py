@@ -1,21 +1,20 @@
 from django.shortcuts import render
 from .forms import ClientForm
-from  django.utils.timezone import now
-from django.contrib.auth.decorators import login_required
+from gallery.models import Photo
 
 #@login_required
 def landing(request):
-    form = ClientForm(request.POST or None)
-
-    if request.method == "POST" and form.is_valid():
+    form_client = ClientForm(request.POST or None)
+    photos = Photo.objects.all()[:6]
+    if request.method == "POST" and form_client.is_valid():
         print(request.POST)
-        print(form.cleaned_data)
-        data = form.cleaned_data
+        print(form_client.cleaned_data)
+        data = form_client.cleaned_data
 
-        print(form.cleaned_data["first_name"])
+        print(form_client.cleaned_data["first_name"])
         print(data["first_name"])
-        new_form = form.save()
-    return render(request, 'landing/index.html', locals())
+        new_form = form_client.save()
+    return render(request, 'landing/index.html', {"form_client": form_client, 'photos': photos})
 
 def registration(request):
     return render(request, 'registration/login.html')

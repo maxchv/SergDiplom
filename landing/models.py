@@ -19,8 +19,6 @@ class Client(models.Model):
         verbose_name_plural = 'Клиенты'
         
 
-
-
 class Master (models.Model):
     full_name = models.CharField(max_length = 100, verbose_name=' фио мастера')
     contact_phone = models.CharField(max_length= 20, verbose_name= 'контактный телефон')

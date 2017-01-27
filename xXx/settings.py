@@ -25,7 +25,7 @@ SECRET_KEY = '+yvc$wwoc#twzb#rg(e#o@x=id-@(7lv+q(a@423l*x_yf4ilg'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'landing',
     'crispy_forms',
     'easy_thumbnails',
+    'gallery'
 ]
 
 
@@ -127,7 +128,7 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'),]
 # STATIC_ROOT = os.path.join(BASE_DIR, 'landing/static')
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
-LOGIN_REDIRECT_URL = "index"
+LOGIN_REDIRECT_URL = "landing"
 LOGIN_URL = "landing_login"
 LOGOUT_URL = "landing_logout"
 
