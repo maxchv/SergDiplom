@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
 {% block content %}
-    {% include "../landing/include/header.html" %}
-    <div id="register_wrapper">
+    {% include "include/header.html" %}
+    <div id="login">
         <div class="container">
             <section class="page_section">
-                <div class="col-lg-8 col-lg-offset-2 wow fadeInLeft delay-06s">
+                <div class="col-lg-6 col-lg-offset-3 wow fadeInLeft delay-06s">
                     <div class="form">
                         <form action="" method="post">
                             {% csrf_token %}

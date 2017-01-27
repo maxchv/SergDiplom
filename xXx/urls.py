@@ -25,6 +25,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^', include('landing.urls')),
     url(r'^gallery/', include('gallery.urls')),
+    url(r'^orders/', include('orders.urls')),
     url(r'^login/$', login, name='landing_login'),
     url(r'^register/$', forms.RegisterFormView.as_view(), name='registration'),
     url(r'^logout/$', logout, {"next_page": "/"}, name='landing_logout'),

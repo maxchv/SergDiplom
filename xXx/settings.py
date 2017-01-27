@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'landing',
     'crispy_forms',
     'easy_thumbnails',
-    'gallery'
+    'gallery',
+    'orders'
 ]
 
 

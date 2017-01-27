@@ -1,20 +1,22 @@
 from django.shortcuts import render
 from .forms import ClientForm
 from gallery.models import Photo
+from orders.models import FeedBack
+from random import shuffle
 
-#@login_required
+
 def landing(request):
     form_client = ClientForm(request.POST or None)
-    photos = Photo.objects.all()[:6]
+    photos = list(Photo.objects.all())
+    shuffle(photos)
+    comments = list(FeedBack.objects.filter(checked=True))
+    shuffle(comments)
     if request.method == "POST" and form_client.is_valid():
-        print(request.POST)
-        print(form_client.cleaned_data)
         data = form_client.cleaned_data
-
-        print(form_client.cleaned_data["first_name"])
-        print(data["first_name"])
         new_form = form_client.save()
-    return render(request, 'landing/index.html', {"form_client": form_client, 'photos': photos})
+    context = {"form_client": form_client, 'photos': photos[:8], "comments": comments[:5]}
+    return render(request, 'landing/index.html', context)
+
 
 def registration(request):
     return render(request, 'registration/login.html')

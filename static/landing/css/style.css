@@ -1407,11 +1407,12 @@ img {
     color: #222;
 }
 
-#register_wrapper {
+#login, #orders ,#register {
     position: absolute;
     height: 100%;
     width: 100%;
-    padding-top: 60px;
+    padding-top: 80px;
+    background: black;
 }
 
 /* Footer
@@ -2609,3 +2610,4 @@ section#experience {
 #admin {
     padding-top: 100px;
 }
+

@@ -1,7 +1,6 @@
 from django.db import models
 # from django.contrib.auth.models import User
 
-
 class Client(models.Model):
     id = models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')
     email = models.EmailField()
@@ -14,6 +13,7 @@ class Client(models.Model):
 
     def __str__(self):
         return "Пользователь: %s почта: %s" % (self.first_name, self.email)
+
     class Meta:
         verbose_name = 'Клиент'
         verbose_name_plural = 'Клиенты'
@@ -27,9 +27,11 @@ class Master (models.Model):
 
     def __str__(self):
         return "Мастер:  %s; " "  тел: %s" %( self.full_name, self.contact_phone)
+
     class Meta:
         verbose_name = 'мастер'
         verbose_name_plural = 'мастера'
+
 
 class Work_Time(models.Model):
     start_work_day = models.DateTimeField(verbose_name='начало рабочего дня')
@@ -39,6 +41,7 @@ class Work_Time(models.Model):
 
     def __str__(self):
         return self.customer
+
     class Meta:
         verbose_name_plural='рабочее время'
         verbose_name = 'рабочее время'

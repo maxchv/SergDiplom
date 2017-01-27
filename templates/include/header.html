@@ -22,11 +22,11 @@
                                 {% if user.is_superuser %}
                                     <li><a href="{% url "gallery" %}#admin" class="scroll-link">Админ панель</a></li>
                                 {% else %}
-                                    <li><a href="{% url "gallery" %}#admin" class="scroll-link">Мои заказы</a></li>
+                                    <li><a href="{% url "orders" %}#orders" class="scroll-link">Мои заказы</a></li>
                                 {% endif %}
                                 <li><a href="{% url "landing_logout" %}" class="scroll-link">Выход</a></li>
                             {% else %}
-                                <li><a href="{% url "landing_login" %}" class="scroll-link">Вход</a></li>
+                                <li><a href="{% url "landing_login" %}#login" class="scroll-link">Вход</a></li>
 {#                                <li><a href="{% url "registration" %}" class="scroll-link" id="r1">Регистрация</a></li>#}
                             {% endif %}
                         </ul>
