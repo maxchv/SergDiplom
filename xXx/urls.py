@@ -27,5 +27,5 @@ urlpatterns = [
     url(r'^gallery/', include('gallery.urls')),
     url(r'^login/$', login, name='landing_login'),
     url(r'^register/$', forms.RegisterFormView.as_view(), name='registration'),
-    url(r'^logout/$', logout, {"next_page": "index"}, name='logout'),
+    url(r'^logout/$', logout, {"next_page": "/"}, name='landing_logout'),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

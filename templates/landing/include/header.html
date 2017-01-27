@@ -12,13 +12,23 @@
                     </div>
                     <div id="main-nav" class="collapse navbar-collapse navStyle">
                         <ul class="nav navbar-nav" id="mainNav">
-                            <li class="active"><a href="#carousel" class="scroll-link">Главная</a></li>
-                            <li><a href="#aboutUs" class="scroll-link">О Нас</a></li>
-                            <li><a href="#service" class="scroll-link">Услуги </a></li>
-                            <li><a href="#Portfolio" class="scroll-link">Галлерея</a></li>
-                            <li><a href="#experience" class="scroll-link">Отзывы</a></li>
-                            <li><a href="#contact" class="scroll-link">Контакты</a></li>
-                            <li><a href="{% url "registration" %}" class="scroll-link" id="r1">Регистрация</a></li>
+                            <li class="active"><a href="{% url "landing" %}#carousel" class="scroll-link">Главная</a></li>
+                            <li><a href="{% url "landing" %}#aboutUs" class="scroll-link">О Нас</a></li>
+                            <li><a href="{% url "landing" %}#service" class="scroll-link">Услуги </a></li>
+                            <li><a href="{% url "landing" %}#Portfolio" class="scroll-link">Галлерея</a></li>
+                            <li><a href="{% url "landing" %}#experience" class="scroll-link">Отзывы</a></li>
+                            <li><a href="{% url "landing" %}#contact" class="scroll-link">Контакты</a></li>
+                            {% if user.is_authenticated %}
+                                {% if user.is_superuser %}
+                                    <li><a href="{% url "gallery" %}#admin" class="scroll-link">Админ панель</a></li>
+                                {% else %}
+                                    <li><a href="{% url "gallery" %}#admin" class="scroll-link">Мои заказы</a></li>
+                                {% endif %}
+                                <li><a href="{% url "landing_logout" %}" class="scroll-link">Выход</a></li>
+                            {% else %}
+                                <li><a href="{% url "landing_login" %}" class="scroll-link">Вход</a></li>
+{#                                <li><a href="{% url "registration" %}" class="scroll-link" id="r1">Регистрация</a></li>#}
+                            {% endif %}
                         </ul>
                     </div>
                     {#        </div>#}

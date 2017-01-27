@@ -5,12 +5,14 @@ from django.views.generic.edit import FormView
 from django.contrib.auth.forms import UserCreationForm
 from django.utils.translation import ugettext_lazy as _
 
+
 class ClientForm(forms.ModelForm):
 
     class Meta:
         model = Client
         #exclude = ['message', 'phone']
         fields = "__all__"
+
 
 class UserFormView(UserCreationForm):
     #first_name = forms.CharField(label=_('first name'), max_length=30, required=True)
@@ -27,6 +29,7 @@ class UserFormView(UserCreationForm):
         if commit:
             user.save()
         return user
+
 
 # http://ustimov.org/posts/17/
 class RegisterFormView(FormView):

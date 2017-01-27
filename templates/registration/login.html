@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
 {% block content %}
+    {% include "../landing/include/header.html" %}
     <div id="register_wrapper">
         <div class="container">
             <section class="page_section">
@@ -11,6 +12,7 @@
                             <!-- as_p для того, чтобы каждый элемент формы был с новой строки -->
                             {{ form|crispy }}
                             <button type="submit" class="btn btn-primary">Логин</button>
+                            <a href="{% url "registration" %}" class="btn btn-primary">Регистрация</a>
                         </form>
                     </div>
                 </div>
