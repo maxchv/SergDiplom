@@ -265,7 +265,6 @@ figure.effect-oscar:hover p {
     -webkit-transform: scale(1);
     transform: scale(1);
     color: #fff;
-+ + + + + + +
 }
 
 figure.effect-oscar:hover figcaption {
@@ -736,7 +735,7 @@ div#main-nav {
 }
 
 .service-list-col1 i {
-    display:;
+    /*display:;*/
     color: #888;
     font-size: 19px;
     font-style: normal;
@@ -1407,7 +1406,7 @@ img {
     color: #222;
 }
 
-#login, #orders ,#register {
+#login, #admin, #register {
     position: absolute;
     height: 100%;
     width: 100%;
@@ -1740,7 +1739,7 @@ img {
     height: 40px;
     margin-top: 40px;
     opacity: 0;
-    background: url(images/zoom.png);
+    /*background: url(images/zoom.png);*/
     background-size: 40px 40px;
     transition: all 0.3s ease 0.1s;
     -moz-transition: all 0.3s ease 0.2s;
@@ -1814,7 +1813,7 @@ img {
 }
 
 #project-page-button-fullscreen li a {
-    background: url(images/close.png) no-repeat #fff;
+    /*background: url(images/close.png) no-repeat #fff;*/
     background-size: 50px 50px;
     width: 50px;
     height: 50px;
@@ -1867,14 +1866,14 @@ img {
 /* Portfolio*/
 
 .project-image-slider .bx-wrapper .bx-next {
-    background: url("images/project_slider_right.png") no-repeat;
+    /*background: url("images/project_slider_right.png") no-repeat;*/
     background-size: 35px 65px;
     opacity: 0.3;
     right: -90px;
 }
 
 .project-image-slider .bx-wrapper .bx-prev {
-    background: url("images/project_slider_left.png") no-repeat;
+    /*background: url("images/project_slider_left.png") no-repeat;*/
     background-size: 35px 65px;
     opacity: 0.3;
     left: -90px;
@@ -1983,7 +1982,7 @@ div.mc-image {
 }
 
 .in-slide-content div.info-slide {
-    background: #FFF url(images/info.png) no-repeat left bottom;
+    /*background: #FFF url(images/info.png) no-repeat left bottom;*/
     background-size: 46px 46px;
     position: absolute;
     top: 30px;
@@ -2313,7 +2312,7 @@ div.mc-image {
     background: #fff;
     border-radius: 8px;
     overflow: hidden;
-    -webkit-mask-image: -webkit-radial-gradient(circle, white, black);
+    /*-webkit-mask-image: -webkit-radial-gradient(circle, white, black);*/
 }
 
 .news-content .news-media a:hover img {
@@ -2440,9 +2439,9 @@ div.mc-image {
         padding: 40px 0;
     }
 
-, #clients {
-      padding: 40px 0;
-  }
+    #clients {
+        padding: 40px 0;
+    }
 
     .client_logos ul li {
         display: inline;
@@ -2609,5 +2608,19 @@ section#experience {
 
 #admin {
     padding-top: 100px;
+    position: relative;
 }
 
+.feedback_section > h2 {
+    color: white;
+}
+
+.btn-primary:hover, .btn-primary:focus {
+    background-color: #272121;
+    background-position: 0 -15px;
+}
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open>.dropdown-toggle.btn-primary {
+    color: #fff;
+    background-color: #1d1b15;
+    border-color: #0d0e0e;
+}

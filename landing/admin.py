@@ -16,7 +16,7 @@ class ClientAdmin(admin.ModelAdmin):
         model = Client
 
 
-admin.site.register(Client, ClientAdmin)
+# admin.site.register(Client, ClientAdmin)
 
 
 class MasterAdmin(admin.ModelAdmin):
@@ -26,5 +26,5 @@ class MasterAdmin(admin.ModelAdmin):
         model = Master
 
 
-admin.site.register(Master)
-admin.site.register(Work_Time)
+# admin.site.register(Master)
+# admin.site.register(Work_Time)

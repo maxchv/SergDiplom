@@ -12,3 +12,22 @@ class FeedBackForm(forms.ModelForm):
         model = FeedBack
         exclude = ['checked']
         #fields = "__all__"
+        widgets = {
+            'title': forms.TextInput(attrs={'placeholder': 'Заголовок отзыва'}),
+            'message': forms.Textarea(
+                attrs={'placeholder': 'Содержимое отзыва'}),
+        }
+
+
+class OrderForm(forms.ModelForm):
+    datetime = forms.DateTimeField(label='Время',input_formats=['%Y-%m-%dT%H:%M'], widget=forms.TextInput(attrs={'type':'datetime-local'}))
+
+    class Meta:
+        model = Order
+        exclude = ['client', 'canceled', 'timestamp']
+        #fields = "__all__"
+
+        widgets = {
+            'phone': forms.TextInput(
+                attrs={'placeholder': '(0XX) XXX-XX-XX'}),
+        }

@@ -1,0 +1,64 @@
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+{% load thumbnail %}
+
+<!--Footer-->
+<footer id="admin">
+    <div class="container">
+    <section class="page_section">
+            <div class="feedback_section">
+                <h2 id="orders">Мои заказы</h2>
+            </div>
+            {% for order in orders %}
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <h3>Заказ №{{ order.id }}</h3>
+                    <div>На {{ order.datetime }} мастер {{ order.master.first_name }} {{ order.master.last_name }}</div>
+                    <span class="date">Заказ сделан в {{ order.timestamp }}</span>
+                </div>
+            </div>
+            {% endfor %}
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 wow fadeInLeft delay-06s">
+                    <div class="form">
+                        <form action="{% url 'order' %}" method="post">
+                            {% csrf_token %}
+                            {{ form_order|crispy }}
+                            <div>
+                                <button type="submit" class="btn btn-primary">Заказать</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="page_section">
+            <div class="feedback_section">
+                <h2 id="feedback">Мои отзывы</h2>
+            </div>
+            {% for feedback in feedbacks %}
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <h3>{{ feedback.title }}</h3>
+                    <div>{{ feedback.message }}</div>
+                    <span class="date">{{ feedback.date }}</span>
+                </div>
+            </div>
+            {% endfor %}
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 wow fadeInLeft delay-06s">
+                    <div class="form">
+                        <form action="{% url 'feedback' %}" method="post">
+                            {% csrf_token %}
+                            {{ form_feedback|crispy }}
+                            <div>
+                                <button type="submit" class="btn btn-primary">Отправить</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+</footer>

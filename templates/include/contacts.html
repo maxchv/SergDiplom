@@ -10,7 +10,7 @@
                 <h2>Контакты</h2>
             </div>
             <div class="row">
-                <div class="col-lg-4 wow fadeInLeft">
+                <div class="col-lg-4 col-lg-offset-1 wow fadeInLeft">
                     <div class="contact_info">
                         <div class="detail">
                             <h4>Торговый центр "Пассаж"(2 Этаж)</h4>
@@ -48,12 +48,12 @@
                 {#                        </form>#}
                 {#                    </div>#}
                 {#                </div>#}
-                <div id="map" class="col-lg-8"></div>
+                <div id="map" class="col-lg-8" style="width: 500px; height: 300px"></div>
                 <script>
                     function initMap() {
-                        var uluru = {lat: -25.363, lng: 131.044};
+                        var uluru = {lat: 48.637846, lng: 35.258512};
                         var map = new google.maps.Map(document.getElementById('map'), {
-                            zoom: 4,
+                            zoom: 16,
                             center: uluru
                         });
                         var marker = new google.maps.Marker({

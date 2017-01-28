@@ -16,3 +16,34 @@ class FeedBack(models.Model):
         verbose_name = "Отзыв"
         verbose_name_plural = "Отзывы"
 
+
+class Master (models.Model):
+    first_name = models.CharField(max_length = 100, verbose_name='Имя')
+    last_name = models.CharField(max_length=100, verbose_name="Фамилия")
+    phone = models.CharField(max_length= 20, verbose_name= 'Контактный телефон')
+    photo = models.ImageField(upload_to="master", verbose_name=("Фото мастера"), blank=True)
+    # client = models.ForeignKey(Client)
+
+    def __str__(self):
+        return "Мастер: {} {} тел: {}".format (self.first_name, self.last_name, self.phone)
+
+    class Meta:
+        verbose_name = 'Мастер'
+        verbose_name_plural = 'Мастера'
+
+
+class Order(models.Model):
+    client = models.ForeignKey(User, verbose_name="Клиент")
+    datetime = models.DateTimeField(verbose_name="Время")
+    canceled = models.BooleanField(verbose_name="Отменен", default=False)
+    phone = models.CharField(max_length=20,verbose_name="Контактный телефон")
+    master = models.ForeignKey(Master, verbose_name='Мастер')
+    timestamp = models.DateTimeField(verbose_name="Время заказа", auto_now_add=True)
+
+    def __str__(self):
+        return "Заказ № {} от {}".format(self.id, self.timestamp)
+
+
+    class Meta:
+        verbose_name = "Заказ"
+        verbose_name_plural = "Заказы"
