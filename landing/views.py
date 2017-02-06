@@ -1,3 +1,4 @@
+from django.contrib.auth.forms import AuthenticationForm
 from django.shortcuts import render
 from .forms import ClientForm
 from gallery.models import Photo
@@ -14,7 +15,11 @@ def landing(request):
     if request.method == "POST" and form_client.is_valid():
         data = form_client.cleaned_data
         new_form = form_client.save()
-    context = {"form_client": form_client, 'photos': photos[:8], "comments": comments[:5]}
+    login_form = AuthenticationForm()
+    context = {"form_client": form_client,
+               "login_form": login_form,
+               'photos': photos[:8],
+               "comments": comments[:5]}
     return render(request, 'landing/index.html', context)
 
 

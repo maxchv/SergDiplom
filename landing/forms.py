@@ -10,13 +10,13 @@ class ClientForm(forms.ModelForm):
 
     class Meta:
         model = Client
-        #exclude = ['message', 'phone']
+        # exclude = ['message', 'phone']
         fields = "__all__"
 
 
 class UserFormView(UserCreationForm):
-    #first_name = forms.CharField(label=_('first name'), max_length=30, required=True)
-    #last_name = forms.CharField(label=_('last name'), max_length=30, required=False)
+    # first_name = forms.CharField(label=_('first name'), max_length=30, required=True)
+    # last_name = forms.CharField(label=_('last name'), max_length=30, required=False)
     email = forms.EmailField(label=_("Email address"), required=True)
 
     class Meta:

@@ -7,6 +7,20 @@
     {##}
     {#    </div>#}
 
+     <div id="login">
+
+                    <div class="form">
+                        <form action="{% url 'landing_login' %}" method="post">
+                            {% csrf_token %}
+                            <!-- as_p для того, чтобы каждый элемент формы был с новой строки -->
+                            {{ login_form|crispy }}
+                            <button type="submit" class="btn btn-primary">Логин</button>
+                            <a href="{% url "registration" %}" class="btn btn-primary">Регистрация</a>
+                        </form>
+                    </div>
+
+    </div>
+
     {% include "include/carousel.html" %}
 
     <!--Header_section-->
