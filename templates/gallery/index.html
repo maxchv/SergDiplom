@@ -9,7 +9,7 @@
             <div class="form">
                 <form action="" method="post" enctype="multipart/form-data">
                     <fieldset>
-                        <legend>Загрузка изображений</legend>
+                        <legend>Загрузка изображений в Галлерею</legend>
                         {% csrf_token %}
                         <!-- as_p для того, чтобы каждый элемент формы был с новой строки -->
                         {{ form|crispy }}

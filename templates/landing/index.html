@@ -3,23 +3,19 @@
 {% load crispy_forms_tags %}
 {% load thumbnail %}
 {% block content %}
-    {#    <div id="registration">#}
-    {##}
-    {#    </div>#}
 
-     <div id="login">
-
-                    <div class="form">
-                        <form action="{% url 'landing_login' %}" method="post">
-                            {% csrf_token %}
-                            <!-- as_p для того, чтобы каждый элемент формы был с новой строки -->
-                            {{ login_form|crispy }}
-                            <button type="submit" class="btn btn-primary">Логин</button>
-                            <a href="{% url "registration" %}" class="btn btn-primary">Регистрация</a>
-                        </form>
-                    </div>
-
+    <div id="login" hidden>
+        <div class="form">
+            <form action="{% url 'landing_login' %}?next=/" method="post">
+                {% csrf_token %}
+                <!-- as_p для того, чтобы каждый элемент формы был с новой строки -->
+                {{ login_form|crispy }}
+                <a href="{% url "registration" %}" class="btn btn-primary">Регистрация</a>
+                <button type="submit" class="btn btn-primary" id="btn-login">Логин</button>
+            </form>
+        </div>
     </div>
+    <div id="background"></div>
 
     {% include "include/carousel.html" %}
 
@@ -36,5 +32,7 @@
     {% include "include/feedback.html" %}
 
     {% include "include/contacts.html" %}
+
+
 
 {% endblock %}

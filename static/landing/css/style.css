@@ -2619,7 +2619,8 @@ section#experience {
     background-color: #272121;
     background-position: 0 -15px;
 }
-.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open>.dropdown-toggle.btn-primary {
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {
     color: #fff;
     background-color: #1d1b15;
     border-color: #0d0e0e;
@@ -2630,7 +2631,7 @@ section#experience {
     top: -300px;
     z-index: 5000;
     /*width: 500px;*/
-    padding-top:  50px;
+    padding-top: 50px;
     height: 280px;
     opacity: 1;
     /*display: none;*/
@@ -2639,9 +2640,36 @@ section#experience {
     opacity: 0.9;
     left: 50%;
     transform: translateX(-50%);
+    display: none;
 }
 
-#login >.form {
+#login > .form {
     width: 500px;
     margin: 0 auto;
+}
+
+#background {
+    display: none;
+    opacity: 0.5;
+    position: fixed;
+    z-index: 4000;
+    background: black;
+    width: 100%;
+    top: 0;
+    bottom: 0;
+}
+
+#enter {
+    color: #F7F7F7;
+    font-weight: 600;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, .25);
+    display: block;
+    font-size: 15px;
+    font-family: 'Raleway', sans-serif;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+#btn-login {
+    margin-left: 322px;
 }

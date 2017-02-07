@@ -1,30 +1,47 @@
 {% load staticfiles %}
-    <div id="carousel" class="carousel slide carousel-fade" data-ride="carousel">
-        <ol class="carousel-indicators">
-            <li data-target="#carousel" data-slide-to="0" class="active"></li>
-            <li data-target="#carousel" data-slide-to="1"></li>
-            <li data-target="#carousel" data-slide-to="2"></li>
-        </ol>
-        <!-- Carousel items -->
-        <div class="carousel-inner">
-            <div class="active item">
-                <div class="caption zoomIn wow animated">
-                    <h2>Анастасия Гришаева <br/><strong>СТУДИЯ НОГТЕВОЙ МОДЫ </strong></h2>
-                </div>
-
-                <img class="" src="{% static "landing/img/slide1.jpg" %}" alt=""></div>
-            <div class="item">
-                <div class="caption zoomIn wow animated">
-                    <h2>Восстановление ногтей<br/><strong></strong></h2>
-                </div>
-                <img class="" src="{% static "landing/img/slide2.jpg" %}" alt=""></div>
-            <div class="item">
-                <div class="caption zoomIn wow animated">
-                    <h2>Художественный маникюр<br/><strong>Создай свой неповторимы стиль</strong></h2>
-                </div>
-                <img class="" src="{% static "landing/img/slide3.jpg" %}" alt=""></div>
+<div id="carousel" class="carousel slide carousel-fade" data-ride="carousel">
+    <ol class="carousel-indicators">
+        <li data-target="#carousel" data-slide-to="0" class="active"></li>
+        <li data-target="#carousel" data-slide-to="1"></li>
+        <li data-target="#carousel" data-slide-to="2"></li>
+    </ol>
+    <!-- Carousel items -->
+    <div class="carousel-inner">
+        {% for img in head_images %}
+            {% if forloop.first %}
+                <div class="active item">
+            {% else %}
+                <div class="item">
+            {% endif %}
+        <div class="caption zoomIn wow animated">
+            <h2>{{ img.title }}<br/><strong>{{ img.description|upper }}</strong></h2>
         </div>
+
+        <img class="" src="{{ img.image.url }}" alt="">
+        </div>
+        {% endfor %}
+        {#        <div class="active item">#}
+        {#            <div class="caption zoomIn wow animated">#}
+        {#                <h2>Анастасия Гришаева <br/><strong>СТУДИЯ НОГТЕВОЙ МОДЫ </strong></h2>#}
+        {#            </div>#}
+        {##}
+        {#            <img class="" src="{% static "landing/img/slide1.jpg" %}" alt="">#}
+        {#        </div>#}
+        {#        <div class="item">#}
+        {#            <div class="caption zoomIn wow animated">#}
+        {#                <h2>Восстановление ногтей<br/><strong></strong></h2>#}
+        {#            </div>#}
+        {#            <img class="" src="{% static "landing/img/slide2.jpg" %}" alt=""></div>#}
+        {#        <div class="item">#}
+        {#            <div class="caption zoomIn wow animated">#}
+        {#                <h2>Художественный маникюр<br/><strong>Создай свой неповторимы стиль</strong></h2>#}
+        {#            </div>#}
+        {#            <img class="" src="{% static "landing/img/slide3.jpg" %}" alt=""></div>#}
+        {#        </div>#}
+
         <!-- Carousel nav -->
         <a class="carousel-control left" href="#carousel" data-slide="prev">&lsaquo;</a>
         <a class="carousel-control right" href="#carousel" data-slide="next">&rsaquo;</a>
+        </div>
     </div>
+</div>

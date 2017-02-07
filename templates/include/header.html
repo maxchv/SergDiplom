@@ -20,7 +20,8 @@
                             <li><a href="{% url "landing" %}#contact" class="scroll-link">Контакты</a></li>
                             {% if user.is_authenticated %}
                                 {% if user.is_superuser %}
-                                    <li><a href="{% url "gallery" %}#admin" class="scroll-link">Админ панель</a></li>
+{#                                    <li><a href="{% url "gallery" %}#admin" class="scroll-link">Админ панель</a></li>#}
+                                    <li><a href="/admin" class="scroll-link">Админ панель</a></li>
                                 {% else %}
                                     <li><a href="{% url "orders" %}#orders" class="scroll-link">Мои заказы</a></li>
                                 {% endif %}
