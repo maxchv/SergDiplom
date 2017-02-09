@@ -2673,3 +2673,7 @@ section#experience {
 #btn-login {
     margin-left: 322px;
 }
+
+.new-link {
+    color: red !important;
+}
