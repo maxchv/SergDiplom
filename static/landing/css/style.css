@@ -2626,21 +2626,31 @@ section#experience {
     border-color: #0d0e0e;
 }
 
-#login {
+#login, #register {
     position: fixed;
     top: -300px;
     z-index: 5000;
     /*width: 500px;*/
     padding-top: 50px;
     height: 280px;
-    opacity: 1;
     /*display: none;*/
     width: 600px;
     border-radius: 20px;
     opacity: 0.9;
     left: 50%;
     transform: translateX(-50%);
-    display: none;
+    display: block;
+}
+
+#register {
+    display: block;
+    z-index: 100000;
+    top: -300px;
+}
+
+#register > .form {
+    width: 500px;
+    margin: 0 auto;
 }
 
 #login > .form {

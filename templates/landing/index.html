@@ -4,13 +4,24 @@
 {% load thumbnail %}
 {% block content %}
 
+    <div id="register">
+        <div class="form">
+            <form action="{% url 'registration' %}?next=/" method="post">
+                {% csrf_token %}
+                {{ login_form|crispy }}
+                <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
+            </form>
+        </div>
+    </div>
+
     <div id="login" hidden>
         <div class="form">
             <form action="{% url 'landing_login' %}?next=/" method="post">
                 {% csrf_token %}
                 <!-- as_p для того, чтобы каждый элемент формы был с новой строки -->
                 {{ login_form|crispy }}
-                <a href="{% url "registration" %}" class="btn btn-primary">Регистрация</a>
+{#                <a href="{% url "registration" %}" class="btn btn-primary">Регистрация</a>#}
+                <button type="button" class="btn btn-primary" id="btn-register">Регистрация</button>
                 <button type="submit" class="btn btn-primary" id="btn-login">Логин</button>
             </form>
         </div>
