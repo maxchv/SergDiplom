@@ -2644,8 +2644,8 @@ section#experience {
 
 #register {
     display: block;
-    z-index: 100000;
-    top: -300px;
+    height: 430px;
+    top: -500px;
 }
 
 #register > .form {
@@ -2680,7 +2680,7 @@ section#experience {
     text-transform: uppercase;
 }
 
-#btn-login {
+.btn-right {
     margin-left: 322px;
 }
 

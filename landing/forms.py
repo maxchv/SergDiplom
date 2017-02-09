@@ -6,26 +6,27 @@ from django.contrib.auth.forms import UserCreationForm
 from django.utils.translation import ugettext_lazy as _
 
 
-class ClientForm(forms.ModelForm):
-
-    class Meta:
-        model = Client
-        # exclude = ['message', 'phone']
-        fields = "__all__"
+# class ClientForm(forms.ModelForm):
+#
+#     class Meta:
+#         model = Client
+#         # exclude = ['message', 'phone']
+#         fields = "__all__"
 
 
 class UserFormView(UserCreationForm):
     # first_name = forms.CharField(label=_('first name'), max_length=30, required=True)
     # last_name = forms.CharField(label=_('last name'), max_length=30, required=False)
-    email = forms.EmailField(label=_("Email address"), required=True)
+    #email = forms.EmailField(label=_("Email address"), required=True)
 
     class Meta:
         model = User
-        fields = ("username", "email", "password1", "password2")
+        #fields = ("username", "email", "password1", "password2")
+        fields = ("username", "password1", "password2")
 
     def save(self, commit=True):
         user = super(UserFormView, self).save(commit=False)
-        user.email = self.cleaned_data["email"]
+        #user.email = self.cleaned_data["email"]
         if commit:
             user.save()
         return user

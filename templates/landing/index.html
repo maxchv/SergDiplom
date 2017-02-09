@@ -4,12 +4,12 @@
 {% load thumbnail %}
 {% block content %}
 
-    <div id="register">
+    <div id="register" hidden>
         <div class="form">
             <form action="{% url 'registration' %}?next=/" method="post">
                 {% csrf_token %}
-                {{ login_form|crispy }}
-                <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
+                {{ register_form|crispy }}
+                <button type="submit" class="btn btn-primary btn-right">Зарегистрироваться</button>
             </form>
         </div>
     </div>
@@ -22,7 +22,7 @@
                 {{ login_form|crispy }}
 {#                <a href="{% url "registration" %}" class="btn btn-primary">Регистрация</a>#}
                 <button type="button" class="btn btn-primary" id="btn-register">Регистрация</button>
-                <button type="submit" class="btn btn-primary" id="btn-login">Логин</button>
+                <button type="submit" class="btn btn-primary btn-right" id="btn-login">Логин</button>
             </form>
         </div>
     </div>

@@ -4,9 +4,8 @@
 $(function () {
     $("#enter").click(function () {
         // форма входа
-        $("#login").show();
         $('#background').fadeIn(1200);
-        $("#login").animate({top: "200px"}, 1200, function () {
+        $("#login").show().animate({top: "200px"}, 1200, function () {
             $("#id_username").focus();
         });
     });
@@ -19,16 +18,19 @@ $(function () {
 
     // форма регистрации
     $("#btn-register").click(function () {
-        login_up();
-         $("#register").delay(1000).animate({top: "200px"}, 1200, function () {
-            $("#id_username").focus();
+        $("#login:visible").animate({top: "-300px"}, 1200, function () {
+            $("#login").hide();
+            $("#register").show().animate({top: "100px"}, 1200, function () {
+                $("#id_username").focus();
+            });
         });
+
     });
 
     $("#background").click(function () {
         $(this).fadeOut(1200);
         login_up();
-        $("#register:visible").animate({top: "-300px"}, 1200, function () {
+        $("#register:visible").animate({top: "-500px"}, 1200, function () {
             $("#register").hide();
         });
     });
