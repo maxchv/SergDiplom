@@ -11,7 +11,7 @@
         <!-- Title -->
         <div class="section-title">
             <h2>Галлерея</h2>
-            <h6>Lorem ipsum dolor sit amet, consectetur Morbi sagittis, sem quisci ipsum</h6>
+{#            <h6>Lorem ipsum dolor sit amet, consectetur Morbi sagittis, sem quisci ipsum</h6>#}
 
         </div>
         <!--/Title -->
@@ -45,14 +45,18 @@
         {% for photo in photos %}
             <!-- Portfolio Item -->
             <figure style="position: absolute; left: 0px; top: 0px; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1); width: 337px; opacity: 1;"
-                    class="portfolio-item one-four animals isotope-item effect-oscar">
+                    {% if photo.is_nail_polish %}
+                        class="portfolio-item one-four animals isotope-item effect-oscar nature">
+                    {% else %}
+                        class="portfolio-item one-four animals isotope-item effect-oscar">
+                    {% endif %}
 
                 <div class="portfolio_img">
-                    <img src="{% thumbnail photo.image 320x320 crop %}" alt="Portfolio 1"></div>
+                    <img src="{% thumbnail photo.image 320x320 crop %}" alt="{{ photo.description }}"></div>
                 <figcaption>
                     <div>
                         <a href="{{ photo.image.url }}" class="fancybox">
-                            <h2>Внимание<span><br>Топ заказов</span></h2>
+                            <h2>{{ photo.title|safe }}</h2>
                             <p>{{ photo.description }}</p>
                         </a>
                     </div>
