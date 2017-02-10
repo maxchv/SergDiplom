@@ -16,13 +16,15 @@
 
     <div id="login" hidden>
         <div class="form">
-            <form action="{% url 'landing_login' %}?next=/" method="post">
+{#            <form action="{% url 'landing_login' %}?next=/" method="post">#}
+            <form action="{% url 'login_ajax' %}?next=/" method="post">
                 {% csrf_token %}
                 <!-- as_p для того, чтобы каждый элемент формы был с новой строки -->
                 {{ login_form|crispy }}
 {#                <a href="{% url "registration" %}" class="btn btn-primary">Регистрация</a>#}
                 <button type="button" class="btn btn-primary" id="btn-register">Регистрация</button>
-                <button type="submit" class="btn btn-primary btn-right" id="btn-login">Логин</button>
+{#                <button type="submit" class="btn btn-primary btn-right" id="btn-login">Логин</button>#}
+                <button type="button" class="btn btn-primary btn-right" id="btn-login">Логин</button>
             </form>
         </div>
     </div>

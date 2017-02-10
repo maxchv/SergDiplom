@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.conf.urls import url, include
-from landing import forms
+from landing import forms, views
 from django.contrib.auth.views import login, logout
 from django.conf.urls.static import static
 from django.conf import settings
@@ -26,6 +26,7 @@ urlpatterns = [
     url(r'^', include('landing.urls')),
     url(r'^gallery/', include('gallery.urls')),
     url(r'^orders/', include('orders.urls')),
+    url(r'^login_ajax/$', views.login_ajax, name='login_ajax'),
     url(r'^login/$', login, name='landing_login'),
     url(r'^register/$', forms.RegisterFormView.as_view(), name='registration'),
     url(r'^logout/$', logout, {"next_page": "/"}, name='landing_logout'),
