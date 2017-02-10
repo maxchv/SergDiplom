@@ -67,7 +67,8 @@ $(function () {
         mainNav.append('<li><a href="/logout/" class="scroll-link new-link">Выход</a></li>');
     }
 
-    $("#btn-login").click(function () {
+    $("#form-login").submit(function (e) {
+        e.preventDefault();
         var login = $("#login");
         var data = {
             'username': login.find("input[name=username]").val(),
