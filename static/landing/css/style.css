@@ -2632,7 +2632,7 @@ section#experience {
     z-index: 5000;
     /*width: 500px;*/
     padding-top: 50px;
-    height: 280px;
+    height: 250px;
     /*display: none;*/
     width: 600px;
     border-radius: 20px;
@@ -2656,6 +2656,7 @@ section#experience {
 #login > .form {
     width: 500px;
     margin: 0 auto;
+    margin-top: -20px;
 }
 
 #background {
@@ -2686,4 +2687,9 @@ section#experience {
 
 .new-link {
     color: red !important;
+}
+
+.form-errors {
+    display: none;
+    /*height: 20px;*/
 }

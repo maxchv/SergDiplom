@@ -89,6 +89,15 @@ $(function () {
                         update_menu(data.menu);
                         login_up();
                         $("#background").fadeOut(1200);
+                    } else if(data.status == 'error') {
+                        var msg = data.message['0']['0'];
+                        console.log(msg);
+                        if(data.message) {
+                            $("#form-login > .form-errors").text(msg.message);
+                            $("#login").animate({height: "280px"});
+                            $("#form-login > .form-errors").slideDown();
+                            // FIXME: set focus on first input
+                        }
                     }
                 },
                 error: function (xhr, str) {

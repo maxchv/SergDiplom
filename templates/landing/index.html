@@ -21,6 +21,7 @@
                 {% csrf_token %}
                 <!-- as_p для того, чтобы каждый элемент формы был с новой строки -->
                 {{ login_form|crispy }}
+                <p class="form-errors"></p>
 {#                <a href="{% url "registration" %}" class="btn btn-primary">Регистрация</a>#}
                 <button type="button" class="btn btn-primary" id="btn-register">Регистрация</button>
 {#                <button type="submit" class="btn btn-primary btn-right" id="btn-login">Логин</button>#}
