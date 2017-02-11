@@ -93,10 +93,12 @@ $(function () {
                         var msg = data.message['0']['0'];
                         console.log(msg);
                         if(data.message) {
-                            $("#form-login > .form-errors").text(msg.message);
-                            $("#login").animate({height: "280px"});
-                            $("#form-login > .form-errors").slideDown();
-                            // FIXME: set focus on first input
+                            var form_errors = $("#form-login").find(".form-errors");
+                            form_errors.text(msg.message);
+                            login.animate({height: "280px"});
+                            form_errors.slideDown();
+                            login.find("input[name=username]").focus();
+                            login.find("input[name=username]").select();
                         }
                     }
                 },
