@@ -1,5 +1,7 @@
 from django.contrib import admin
 from .models import *
+from .forms import ClientProfileForm
+
 
 #
 # class ClientAdmin(admin.ModelAdmin):
@@ -26,5 +28,9 @@ class MasterAdmin(admin.ModelAdmin):
         model = Master
 
 
-admin.site.register(ClientProfile)
+class ClientProfileAdmin(admin.ModelAdmin):
+    form = ClientProfileForm
+
+
+admin.site.register(ClientProfile, ClientProfileAdmin)
 # admin.site.register(Work_Time)

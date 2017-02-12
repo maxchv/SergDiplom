@@ -1,5 +1,5 @@
 from django import forms
-from .models import *
+from .models import ClientProfile
 from django.contrib.auth.models import User
 from django.views.generic.edit import FormView
 from django.contrib.auth.forms import UserCreationForm
@@ -13,14 +13,22 @@ from django.utils.translation import ugettext_lazy as _
 #         # exclude = ['message', 'phone']
 #         fields = "__all__"
 
+class ClientProfileForm(forms.ModelForm):
+    class Meta:
+        model = ClientProfile
+        fields = '__all__'
+        widgets = {
+            'phone': forms.TextInput(attrs={'placeholder': '+38 (0XX) XXX-XX-XX'})
+        }
+
 
 class UserFormView(UserCreationForm):
     # first_name = forms.CharField(label=_('first name'), max_length=30, required=True)
     # last_name = forms.CharField(label=_('last name'), max_length=30, required=False)
-    #email = forms.EmailField(label=_("Email address"), required=True)
+    # email = forms.EmailField(label=_("Email address"), required=True)
     username = forms.CharField(label='Имя пользователя',
                                help_text='Обязательное поле. Только буквы, цифры и символы @/./+/-/_.',
-                               widget=forms.TextInput(attrs={'id': 'username-register'}) )
+                               widget=forms.TextInput(attrs={'id': 'username-register'}))
 
     class Meta:
         model = User
@@ -39,7 +47,7 @@ class RegisterFormView(FormView):
 
     # Ссылка, на которую будет перенаправляться пользователь в случае успешной регистрации.
     # В данном случае указана ссылка на страницу входа для зарегистрированных пользователей.
-    #success_url = "/login/"
+    # success_url = "/login/"
     success_url = "/"
 
     # Шаблон, который будет использоваться при отображении представления.
