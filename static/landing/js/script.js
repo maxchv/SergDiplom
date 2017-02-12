@@ -2,37 +2,54 @@
  * Created by shaptala on 06.02.2017.
  */
 $(function () {
-    $("#enter").click(function () {
-        // форма входа
-        $('#background').fadeIn(1200);
-        $("#login").show().animate({top: "200px"}, 1200, function () {
+
+    function login_down(time, delay) {
+        var time = time || 1200;
+        var delay = delay || 0;
+        $('#background').delay(delay).fadeIn(time);
+        $("#login").show().delay(delay).animate({top: "200px"}, time, function () {
             $("#id_username").focus();
         });
+    }
+
+    $("#enter").click(function () {
+        // форма входа
+        login_down();
     });
 
-    // форма регистрации
-    $("#btn-register").click(function () {
-        $("#login:visible").animate({top: "-300px"}, 1200, function () {
+    function register_down(time) {
+        var time = time || 1200;
+        $("#login:visible").animate({top: "-300px"}, time, function () {
             $("#login").hide();
-            $("#register").show().animate({top: "150px"}, 1200, function () {
+            $("#register").show().animate({top: "150px"}, time, function () {
                 $("#id_username").focus();
             });
         });
+    }
 
+    // форма регистрации
+    $("#btn-form-register").click(function () {
+        register_down();
     });
 
-    function login_up() {
-        $("#login:visible").animate({top: "-300px"}, 1200, function () {
+    function login_up(time) {
+        var time = time || 1200;
+        $("#login:visible").animate({top: "-300px"}, time, function () {
             $("#login").hide();
+        });
+    }
+
+    function register_up(time) {
+        var time = time || 1200;
+         $("#register:visible").animate({top: "-500px"}, time, function () {
+            $("#register").hide();
         });
     }
 
     $("#background").click(function () {
         $(this).fadeOut(1200);
         login_up();
-        $("#register:visible").animate({top: "-500px"}, 1200, function () {
-            $("#register").hide();
-        });
+        register_up();
     });
 
     // using jQuery
@@ -67,13 +84,16 @@ $(function () {
         mainNav.append('<li><a href="/logout/" class="scroll-link new-link">Выход</a></li>');
     }
 
-    $("#form-login").submit(function (e) {
+    // регистрация
+    $("#form-register").submit(function (e) {
         e.preventDefault();
-        var login = $("#login");
+        var self = $(this);
         var data = {
-            'username': login.find("input[name=username]").val(),
-            'password': login.find("input[name=password]").val()
+            'username': self.find("input[name=username]").val(),
+            'password1': self.find("input[name=password1]").val(),
+            'password2': self.find("input[name=password2]").val()
         };
+        var url = $('#form-register').attr('action');
         $.ajax({
                 beforeSend: function (xhr, settings) {
                     if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
@@ -81,7 +101,54 @@ $(function () {
                     }
                 },
                 method: 'POST',
-                url: '/login_ajax/',
+                url: url,
+                data: data,
+                success: function (data) {
+                    console.dir(data);
+                    if (data.status == 'ok') {
+                        //update_menu(data.menu);
+                        register_up();
+                        login_down(1200, 1000);
+                        //$("#background").fadeOut(1200);
+                    }
+                    //else if (data.status == 'error') {
+                    //     var msg = data.message['0']['0'];
+                    //     console.log(msg);
+                    //     if (data.message) {
+                    //         var form_errors = login.find(".form-errors");
+                    //         form_errors.text(msg.message);
+                    //         $('#login').animate({height: "280px"});
+                    //         form_errors.slideDown();
+                    //         login.find("input[name=username]").focus();
+                    //         login.find("input[name=username]").select();
+                    //     }
+                    // }
+                },
+                error: function (xhr, str) {
+                    console.log("error: " + xhr.responseCode)
+                }
+            }
+        );
+    });
+
+    // аутентификация
+    $("#form-login").submit(function (e) {
+        e.preventDefault();
+        var login = $(this);
+        var data = {
+            'username': login.find("input[name=username]").val(),
+            'password': login.find("input[name=password]").val()
+        };
+        var url = $('#form-login').attr('action');
+        console.log('url: ' + url);
+        $.ajax({
+                beforeSend: function (xhr, settings) {
+                    if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                        xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+                    }
+                },
+                method: 'POST',
+                url: url,
                 data: data,
                 success: function (data) {
                     console.dir(data);
@@ -89,13 +156,13 @@ $(function () {
                         update_menu(data.menu);
                         login_up();
                         $("#background").fadeOut(1200);
-                    } else if(data.status == 'error') {
+                    } else if (data.status == 'error') {
                         var msg = data.message['0']['0'];
                         console.log(msg);
-                        if(data.message) {
-                            var form_errors = $("#form-login").find(".form-errors");
+                        if (data.message) {
+                            var form_errors = login.find(".form-errors");
                             form_errors.text(msg.message);
-                            login.animate({height: "280px"});
+                            $('#login').animate({height: "280px"});
                             form_errors.slideDown();
                             login.find("input[name=username]").focus();
                             login.find("input[name=username]").select();
@@ -106,6 +173,6 @@ $(function () {
                     console.log("error: " + xhr.responseCode)
                 }
             }
-        )
+        );
     });
 });

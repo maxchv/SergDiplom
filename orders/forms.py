@@ -20,7 +20,8 @@ class FeedBackForm(forms.ModelForm):
 
 
 class OrderForm(forms.ModelForm):
-    datetime = forms.DateTimeField(label='Время',input_formats=['%Y-%m-%dT%H:%M'], widget=forms.TextInput(attrs={'type':'datetime-local'}))
+    datetime = forms.DateTimeField(label='Время',input_formats=['%Y-%m-%dT%H:%M'],
+                                   widget=forms.TextInput(attrs={'type':'datetime-local'}))
 
     class Meta:
         model = Order

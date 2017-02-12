@@ -27,7 +27,8 @@ urlpatterns = [
     url(r'^gallery/', include('gallery.urls')),
     url(r'^orders/', include('orders.urls')),
     url(r'^login_ajax/$', views.login_ajax, name='login_ajax'),
-    url(r'^login/$', login, name='landing_login'),
-    url(r'^register/$', forms.RegisterFormView.as_view(), name='registration'),
+    # url(r'^login/$', login, name='landing_login'),
+    # url(r'^register/$', forms.RegisterFormView.as_view(), name='registration'),
+    url(r'^register_ajax/$', views.registration_ajax, name='registration_ajax'),
     url(r'^logout/$', logout, {"next_page": "/"}, name='landing_logout'),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

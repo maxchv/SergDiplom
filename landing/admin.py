@@ -26,5 +26,5 @@ class MasterAdmin(admin.ModelAdmin):
         model = Master
 
 
-# admin.site.register(Master)
+admin.site.register(ClientProfile)
 # admin.site.register(Work_Time)

@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 
 class ClientProfile(models.Model):
-    user = models.OneToOneField(User)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     phone = models.CharField(blank=True,
                              max_length=40,
                              verbose_name='Телефон',
@@ -16,6 +16,12 @@ class ClientProfile(models.Model):
                              ])
     photo = models.ImageField(blank=True, verbose_name="Аватарка", upload_to="clients")
 
+    class Meta:
+        verbose_name='Клиент'
+        verbose_name_plural='Клиенты'
+
+    def __str__(self):
+        return self.user
 
 # class Client(models.Model):
 #     id = models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')
