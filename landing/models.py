@@ -21,7 +21,7 @@ class ClientProfile(models.Model):
         verbose_name_plural='Клиенты'
 
     def __str__(self):
-        return self.user
+        return self.user.username
 
 # class Client(models.Model):
 #     id = models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')
