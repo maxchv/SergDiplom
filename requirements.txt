@@ -1,5 +1,6 @@
 Django==1.10.5
 django-crispy-forms==1.6.1
 easy-thumbnails==2.3
+django-datetime-widget==0.9.3
 whitenoise==3.3.0
 gunicorn==19.6.0

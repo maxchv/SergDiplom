@@ -21,9 +21,10 @@
                             {% if user.is_authenticated %}
                                 {% if user.is_superuser %}
 {#                                    <li><a href="{% url "gallery" %}#admin" class="scroll-link">Админ панель</a></li>#}
-                                    <li class=""><a href="/admin" class="scroll-link">Админ панель</a></li>
+                                    <li><a href="/admin" class="scroll-link">Админ панель</a></li>
                                 {% else %}
-                                    <li><a href="{% url "orders" %}#orders" class="scroll-link">Мои заказы</a></li>
+                                    <li><span style="cursor: pointer" id="btn-orders" class="scroll-link">Мои заказы</span></li>
+                                    <li><span style="cursor: pointer" id="btn-feedback" class="scroll-link">Мои отзывы</span></li>
                                 {% endif %}
                                 <li><a href="{% url "landing_logout" %}" class="scroll-link new-link">Выход</a></li>
                             {% else %}

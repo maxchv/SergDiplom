@@ -1406,13 +1406,7 @@ img {
     color: #222;
 }
 
-#login, #admin, #register {
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    padding-top: 80px;
-    background: black;
-}
+
 
 /* Footer
 ---------------------------------*/
@@ -2626,7 +2620,16 @@ section#experience {
     border-color: #0d0e0e;
 }
 
-#login, #register {
+/*#login, #admin, #register {*/
+    /*position: absolute;*/
+    /*height: 100%;*/
+    /*width: 100%;*/
+    /*padding-top: 80px;*/
+    /*background: black;*/
+/*}*/
+
+#login, #register, #order {
+    background: black;
     position: fixed;
     top: -300px;
     z-index: 5000;
@@ -2658,6 +2661,15 @@ section#experience {
     margin: 0 auto;
     margin-top: -20px;
 }
+#order {
+    height: 320px;
+    top: -500px;
+}
+#order > .form {
+    width: 500px;
+    margin: 0 auto;
+    margin-top: -20px;
+}
 
 #background {
     display: none;
@@ -2670,7 +2682,7 @@ section#experience {
     bottom: 0;
 }
 
-#enter {
+#enter, #btn-orders, #btn-feedback {
     color: #F7F7F7;
     font-weight: 600;
     text-shadow: 0 -1px 0 rgba(0, 0, 0, .25);
@@ -2679,10 +2691,16 @@ section#experience {
     font-family: 'Raleway', sans-serif;
     text-decoration: none;
     text-transform: uppercase;
+    padding: 15px;
 }
 
 .btn-right {
     margin-left: 322px;
+}
+
+#btn-do-order {
+    position: absolute;
+    right: 50px;
 }
 
 .new-link {
@@ -2693,3 +2711,4 @@ section#experience {
     display: none;
     /*height: 20px;*/
 }
+

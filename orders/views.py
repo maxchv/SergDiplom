@@ -1,3 +1,4 @@
+from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from .models import FeedBack, Order
 from .forms import FeedBackForm, OrderForm
@@ -44,3 +45,21 @@ def order(request):
             order.client = request.user
             order.save()
     return redirect("orders")
+
+
+@login_required
+def order_ajax(request):
+    if request.method == 'POST':
+        form = OrderForm(request.POST)
+        if form.is_valid():
+            order_data = form.save(commit=False)
+            order_data.client = request.user
+            order_data.save()
+            return JsonResponse({'status': 'ok',
+                                 'user': request.user.username,
+                                 'message': 'welcome superuser'})
+        else:
+            return JsonResponse({'status': 'error',
+                                 'user': request.user.username,
+                                 'message': 'welcome superuser'})
+    return redirect("landing")

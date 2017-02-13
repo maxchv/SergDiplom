@@ -9,6 +9,7 @@ from .forms import UserFormView
 from .models import ClientProfile
 from gallery.models import Photo, HeadImage
 from orders.models import FeedBack
+from orders.forms import OrderForm
 from random import shuffle
 
 
@@ -22,11 +23,10 @@ def landing(request):
     # if request.method == "POST" and form_client.is_valid():
     #     data = form_client.cleaned_data
     #     new_form = form_client.save()
-    login_form = AuthenticationForm()
-    register_form = UserFormView()
     context = {  # "form_client": form_client,
-        "login_form": login_form,
-        'register_form': register_form,
+        "login_form": AuthenticationForm(),
+        'register_form': UserFormView(),
+        'order_form': OrderForm(),
         'head_images': head_images,
         'photos': photos[:8],
         "comments": comments[:5]}
@@ -91,10 +91,12 @@ def login_ajax(request):
                                              {
                                                  'title': 'Мои заказы',
                                                  'link': '#',
+                                                 'id': 'btn-orders'
                                              },
                                              {
                                                  'title': 'Мои отзывы',
                                                  'link': '#',
+                                                 'id': 'btn-feedback'
                                              },
                                          ],
                                          'message': 'welcome client'})

@@ -17,6 +17,21 @@ $(function () {
         login_down();
     });
 
+    function order_down(time, delay) {
+        var time = time || 1200;
+        var delay = delay || 0;
+        $('#background').delay(delay).fadeIn(time);
+        $("#order").show().delay(delay).animate({top: "200px"}, time, function () {
+            $("#order").find('input:nth-of-type(2)').focus();
+        });
+    }
+
+    function btn_orders() {
+        $("#btn-orders").click(function () {
+            order_down();
+        });
+    }
+    btn_orders();
     function register_down(time) {
         var time = time || 1200;
         $("#login:visible").animate({top: "-300px"}, time, function () {
@@ -46,10 +61,19 @@ $(function () {
         });
     }
 
+    function order_up(time) {
+        var time = time || 1200;
+         $("#order:visible").animate({top: "-500px"}, time, function () {
+            $("#order").hide();
+        });
+    }
+
+    // клик по фону
     $("#background").click(function () {
         $(this).fadeOut(1200);
         login_up();
         register_up();
+        order_up();
     });
 
     // using jQuery
@@ -79,9 +103,11 @@ $(function () {
         var mainNav = $("#mainNav");
         mainNav.find("li:last-child").remove();
         for (var i = 0; i < menu.length; i++) {
-            mainNav.append('<li><a href="' + menu[i].link + '" class="scroll-link">' + menu[i].title + '</a></li>');
+            // <span style="cursor: pointer" id="btn-orders" class="scroll-link">Мои заказы</span>
+            mainNav.append('<li><span style="cursor: pointer" id="' + menu[i].id + '" class="scroll-link">' + menu[i].title + '</a></li>');
         }
         mainNav.append('<li><a href="/logout/" class="scroll-link new-link">Выход</a></li>');
+        btn_orders();
     }
 
     // регистрация

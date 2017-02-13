@@ -1,3 +1,4 @@
+from datetimewidget.widgets import DateTimeWidget
 from django import forms
 from .models import *
 from django.contrib.auth.models import User
@@ -20,15 +21,26 @@ class FeedBackForm(forms.ModelForm):
 
 
 class OrderForm(forms.ModelForm):
-    datetime = forms.DateTimeField(label='Время',input_formats=['%Y-%m-%dT%H:%M'],
-                                   widget=forms.TextInput(attrs={'type':'datetime-local'}))
+    # datetime = forms.DateTimeField(label='Время',input_formats=['%Y-%m-%dT%H:%M'],
+    #                                widget=forms.TextInput(attrs={'type':'datetime-local'}))
 
     class Meta:
         model = Order
         exclude = ['client', 'canceled', 'timestamp']
         #fields = "__all__"
 
+        # dateTimeOptions = {
+        #     'format': 'dd/mm/yyyy HH:ii P',
+        #     'autoclose': True,
+        #     'showMeridian': True
+        # }
+
         widgets = {
             'phone': forms.TextInput(
-                attrs={'placeholder': '(0XX) XXX-XX-XX'}),
+                attrs={'placeholder': '(0XX) XXX-XX-XX'}
+            ),
+            'datetime': DateTimeWidget(#options=dateTimeOptions,
+                                       attrs={'id': "datetime_id"},
+                                       usel10n=True,
+                                       bootstrap_version=3)
         }

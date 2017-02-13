@@ -4,6 +4,18 @@
 {% load thumbnail %}
 {% block content %}
 
+    <div id="order" hidden>
+        <div class="form">
+            <form action="{% url 'order_ajax' %}" method="post" id="form-order">
+                {% csrf_token %}
+                {{ order_form|crispy }}
+                <div>
+                    <button type="submit" class="btn btn-primary btn-right" id="btn-do-order">Заказать</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <div id="register" hidden>
         <div class="form">
             <form action="{% url 'registration_ajax' %}" method="post" id="form-register">
