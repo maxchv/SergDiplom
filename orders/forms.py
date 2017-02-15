@@ -24,6 +24,7 @@ class OrderForm(forms.ModelForm):
     # datetime = forms.DateTimeField(label='Время',input_formats=['%Y-%m-%dT%H:%M'],
     #                                widget=forms.TextInput(attrs={'type':'datetime-local'}))
 
+
     class Meta:
         model = Order
         exclude = ['client', 'canceled', 'timestamp']
@@ -41,7 +42,9 @@ class OrderForm(forms.ModelForm):
 
         widgets = {
             'phone': forms.TextInput(
-                attrs={'placeholder': '(0XX) XXX-XX-XX'}
+                attrs={#'placeholder': '(0XX) XXX-XX-XX',
+                       'pattern': '(\+38)?\s*\(?0\d{2}\)?\s*\d{3}\s*[ \-]?\s*(\d{2}\s*[ \-]?\s*){2}',
+                       'type': 'tel'}
             ),
             'datetime': DateTimeWidget(options=dateTimeOptions,
                                        #attrs={'id': "datetime_id"},

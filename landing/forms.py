@@ -18,7 +18,8 @@ class ClientProfileForm(forms.ModelForm):
         model = ClientProfile
         fields = '__all__'
         widgets = {
-            'phone': forms.TextInput(attrs={'placeholder': '+38 (0XX) XXX-XX-XX'})
+            'phone': forms.TextInput(attrs={'placeholder': '+38 (0XX) XXX-XX-XX',
+                                            'type': 'tel'})
         }
 
 
