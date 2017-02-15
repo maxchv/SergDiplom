@@ -7,11 +7,18 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, maximum-scale=3">
     <title>Beauty Salon</title>
-    <script type="text/javascript" src="{% static "landing/js/jquery-1.11.0.min.js" %}"></script>
-    <script type="text/javascript" src="{% static "landing/js/bootstrap.min.js" %}"></script>
-    <script type="text/javascript" src="{% static "landing/js/bootstrap-datetimepicker.js" %}"></script>
-    <link rel="stylesheet" href="{% static 'landing/css/bootstrap.min.css'%}">
-{#    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">#}
+{#    <script type="text/javascript" src="{% static "landing/js/jquery-1.11.0.min.js" %}"></script>#}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+{#    <script type="text/javascript" src="{% static "landing/js/bootstrap.min.js" %}"></script>#}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.12.0/moment.js"></script>
+{#    <script type="text/javascript" src="{% static "landing/js/jquery.datetimepicker.full.js" %}"></script>#}
+    <script type="text/javascript" src="http://django-datetime-widget.asaglimbeni.me/static/js/bootstrap-datetimepicker.js"></script>
+
+    <script type="text/javascript" src="{% static "landing/js/locales/bootstrap-datetimepicker.ru.js" %}"></script>
+
+    <link rel="stylesheet" href="{% static 'landing/css/bootstrap.min.css' %}">
+    {#    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">#}
     <link rel="stylesheet" href="{% static 'landing/css/bootstrap-datetimepicker.min.css' %}">
     <link rel="icon" href="{% static "landing/img/favicon.png" %}" type="image/png">
     <link rel="stylesheet" href="{% static "landing/js/fancybox/jquery.fancybox.css" %}" type="text/css"
@@ -20,12 +27,14 @@
     <link href="{% static "landing/css/font-awesome.css" %}" rel="stylesheet" type="text/css">
     <link href="{% static "landing/css/animate.css" %}" rel="stylesheet" type="text/css">
 
+{#      <link rel="stylesheet" href="{% static 'landing/css/jquery.datetimepicker.min.css' %}">#}
+
     <!--[if lt IE 9]>
     <script src="{% static "landing/js/respond-1.1.0.min.js"%}"></script>
     <script src="{% static "landing/js/html5shiv.js"%}"></script>
     <script src="{% static "landing/js/html5element.js"%}"></script>
 <![endif]-->
-     <link href="{% static "landing/css/style.css" %}" rel="stylesheet" type="text/css">
+    <link href="{% static "landing/css/style.css" %}" rel="stylesheet" type="text/css">
 
 </head>
 <body>

@@ -29,18 +29,22 @@ class OrderForm(forms.ModelForm):
         exclude = ['client', 'canceled', 'timestamp']
         #fields = "__all__"
 
-        # dateTimeOptions = {
-        #     'format': 'dd/mm/yyyy HH:ii P',
-        #     'autoclose': True,
-        #     'showMeridian': True
-        # }
+        dateTimeOptions = {
+            'format': 'dd/mm/yyyy hh:ii',
+            'autoclose': True,
+            'showMeridian': False,
+            'startDate': "15/02/2017",
+            'minuteStep': 30,
+            'daysOfWeekDisabled': [0,6],
+            'weekStart': 1
+        }
 
         widgets = {
             'phone': forms.TextInput(
                 attrs={'placeholder': '(0XX) XXX-XX-XX'}
             ),
-            'datetime': DateTimeWidget(#options=dateTimeOptions,
-                                       attrs={'id': "datetime_id"},
+            'datetime': DateTimeWidget(options=dateTimeOptions,
+                                       #attrs={'id': "datetime_id"},
                                        usel10n=True,
                                        bootstrap_version=3)
         }

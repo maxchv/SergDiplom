@@ -2682,7 +2682,7 @@ section#experience {
     bottom: 0;
 }
 
-#enter, #btn-orders, #btn-feedback {
+#enter, #btn-orders, #btn-feedback, #btn-admin-panel {
     color: #F7F7F7;
     font-weight: 600;
     text-shadow: 0 -1px 0 rgba(0, 0, 0, .25);

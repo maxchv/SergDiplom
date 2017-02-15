@@ -51,15 +51,17 @@ def order(request):
 def order_ajax(request):
     if request.method == 'POST':
         form = OrderForm(request.POST)
+        #print(form)
         if form.is_valid():
             order_data = form.save(commit=False)
             order_data.client = request.user
             order_data.save()
             return JsonResponse({'status': 'ok',
                                  'user': request.user.username,
-                                 'message': 'welcome superuser'})
+                                 'message': 'order saved successfully'})
         else:
+            print(form.errors)
             return JsonResponse({'status': 'error',
                                  'user': request.user.username,
-                                 'message': 'welcome superuser'})
+                                 'message': str(form.errors)})
     return redirect("landing")

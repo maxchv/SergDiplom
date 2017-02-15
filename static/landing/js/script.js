@@ -104,11 +104,65 @@ $(function () {
         mainNav.find("li:last-child").remove();
         for (var i = 0; i < menu.length; i++) {
             // <span style="cursor: pointer" id="btn-orders" class="scroll-link">Мои заказы</span>
-            mainNav.append('<li><span style="cursor: pointer" id="' + menu[i].id + '" class="scroll-link">' + menu[i].title + '</a></li>');
+            mainNav.append('<li><span data-link="'+menu[i].link+'" style="cursor: pointer" id="' + menu[i].id + '" class="scroll-link">' + menu[i].title + '</a></li>');
         }
         mainNav.append('<li><a href="/logout/" class="scroll-link new-link">Выход</a></li>');
         btn_orders();
+        btn_panel_admin();
     }
+
+    function btn_panel_admin() {
+        $("#btn-admin-panel").click(function () {
+            window.location = $(this).attr('data-link');
+        });
+    }
+    btn_panel_admin();
+
+
+    $("#form-order").submit(function (e) {
+        e.preventDefault();
+        var self = $(this);
+        var data = {
+            'datetime': self.find("input[name=datetime]").val(),
+            'phone': self.find("input[name=phone]").val(),
+            'master': self.find("select[name=master]").val()
+        };
+        var url = self.attr('action');
+        $.ajax({
+                beforeSend: function (xhr, settings) {
+                    if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                        xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+                    }
+                },
+                method: 'POST',
+                url: url,
+                data: data,
+                success: function (data) {
+                    console.dir(data);
+                    if (data.status == 'ok') {
+                        order_up();
+                        $("#background").fadeOut(1200);
+                    }
+                    else if (data.status == 'error') {
+                        console.dir(data);
+                        //var msg = data.message['0']['0'];
+                        //console.log(msg);
+                    //     if (data.message) {
+                    //         var form_errors = login.find(".form-errors");
+                    //         form_errors.text(msg.message);
+                    //         $('#login').animate({height: "280px"});
+                    //         form_errors.slideDown();
+                    //         login.find("input[name=username]").focus();
+                    //         login.find("input[name=username]").select();
+                    //     }
+                    }
+                },
+                error: function (xhr, str) {
+                    console.log("error: " + xhr.responseCode)
+                }
+            }
+        );
+    });
 
     // регистрация
     $("#form-register").submit(function (e) {

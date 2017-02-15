@@ -81,6 +81,7 @@ def login_ajax(request):
                                              {
                                                  'title': 'Админ панель',
                                                  'link': '/admin',
+                                                 'id': 'btn-admin-panel'
                                              }
                                          ],
                                          'message': 'welcome superuser'})
