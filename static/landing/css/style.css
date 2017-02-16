@@ -2628,7 +2628,7 @@ section#experience {
     /*background: black;*/
 /*}*/
 
-#login, #register, #order {
+#login, #register, #order, #feedback {
     background: black;
     position: fixed;
     top: -300px;
@@ -2639,10 +2639,15 @@ section#experience {
     /*display: none;*/
     width: 600px;
     border-radius: 20px;
-    opacity: 0.9;
+    opacity: 0.95;
     left: 50%;
     transform: translateX(-50%);
     display: block;
+}
+
+#feedback {
+    top: 100px;
+    height: 350px;
 }
 
 #register {
@@ -2651,24 +2656,20 @@ section#experience {
     top: -500px;
 }
 
-#register > .form {
-    width: 500px;
+#register > .form,
+#login > .form
+#feedback > .form{
+    width: 530px;
     margin: 0 auto;
 }
 
-#login > .form {
-    width: 500px;
-    margin: 0 auto;
+#login > .form,
+#order > .form {
     margin-top: -20px;
 }
 #order {
     height: 320px;
     top: -500px;
-}
-#order > .form {
-    width: 500px;
-    margin: 0 auto;
-    margin-top: -20px;
 }
 
 #background {
@@ -2694,13 +2695,11 @@ section#experience {
     padding: 15px;
 }
 
-.btn-right {
-    margin-left: 322px;
-}
-
-#btn-do-order {
+#btn-do-order,
+#btn-do-feedback,
+#btn-login{
     position: absolute;
-    right: 50px;
+    right: 40px;
 }
 
 .new-link {
@@ -2712,3 +2711,6 @@ section#experience {
     /*height: 20px;*/
 }
 
+.form {
+    margin: 0 40px 0 30px;
+}

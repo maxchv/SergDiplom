@@ -4,6 +4,22 @@
 {% load thumbnail %}
 {% block content %}
 
+    <div id="feedback">
+            <div class="form">
+                <form action="{% url 'feedback_ajax' %}" method="post" id="form-feedback">
+                    {% csrf_token %}
+                    {{ feedback_form|crispy }}
+                    <p class="form-errors"></p>
+                    <div>
+                        <button type="submit" class="btn btn-primary"
+                                id="btn-do-feedback">
+                            Сохранить
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
 {#    {% if user.is_authenticated %}#}
         <div id="order" hidden>
             <div class="form">
@@ -11,7 +27,10 @@
                     {% csrf_token %}
                     {{ order_form|crispy }}
                     <div>
-                        <button type="submit" class="btn btn-primary btn-right" id="btn-do-order">Заказать</button>
+                        <button type="submit" class="btn btn-primary"
+                                id="btn-do-order">
+                            Заказать
+                        </button>
                     </div>
                 </form>
             </div>
@@ -22,7 +41,9 @@
                 <form action="{% url 'registration_ajax' %}" method="post" id="form-register">
                     {% csrf_token %}
                     {{ register_form|crispy }}
-                    <button type="submit" class="btn btn-primary btn-right" id="btn-register">Зарегистрироваться
+                    <button type="submit" class="btn btn-primary"
+                            id="btn-register">
+                        Зарегистрироваться
                     </button>
                 </form>
             </div>
@@ -38,7 +59,7 @@
                     {#                <a href="{% url "registration" %}" class="btn btn-primary">Регистрация</a>#}
                     <button type="button" class="btn btn-primary" id="btn-form-register">Регистрация</button>
                     {#                <button type="submit" class="btn btn-primary btn-right" id="btn-login">Логин</button>#}
-                    <button type="submit" class="btn btn-primary btn-right" id="btn-login">Логин</button>
+                    <button type="submit" class="btn btn-primary" id="btn-login">Логин</button>
                 </form>
             </div>
         </div>

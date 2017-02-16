@@ -4,6 +4,7 @@ from .models import FeedBack, Order
 from .forms import FeedBackForm, OrderForm
 from django.contrib.auth.decorators import login_required
 
+
 @login_required
 def index(request):
     # if request.method == 'POST':
@@ -24,6 +25,7 @@ def index(request):
                'form_order': order_form, 'orders': orders}
     return render(request, "orders/index.html", context)
 
+
 @login_required
 def feedback(request):
     if request.method == 'POST':
@@ -34,6 +36,26 @@ def feedback(request):
             feedback.draft = True
             feedback.save()
     return redirect("orders")
+
+
+@login_required
+def feedback_ajax(request):
+    if request.method == 'POST':
+        form = FeedBackForm(request.POST)
+        if form.is_valid():
+            feedback = form.save(commit=False)
+            feedback.user = request.user
+            feedback.draft = True
+            feedback.save()
+            return JsonResponse({'status': 'ok',
+                                 'user': request.user.username,
+                                 'message': 'feedback saved successfully'})
+        else:
+            print(form.errors)
+            return JsonResponse({'status': 'error',
+                                 'user': request.user.username,
+                                 'message': str(form.errors)})
+    return redirect("landing")
 
 
 @login_required
@@ -51,7 +73,6 @@ def order(request):
 def order_ajax(request):
     if request.method == 'POST':
         form = OrderForm(request.POST)
-        #print(form)
         if form.is_valid():
             order_data = form.save(commit=False)
             order_data.client = request.user

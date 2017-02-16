@@ -31,6 +31,7 @@ $(function () {
             order_down();
         });
     }
+
     btn_orders();
     function register_down(time) {
         var time = time || 1200;
@@ -56,14 +57,14 @@ $(function () {
 
     function register_up(time) {
         var time = time || 1200;
-         $("#register:visible").animate({top: "-500px"}, time, function () {
+        $("#register:visible").animate({top: "-500px"}, time, function () {
             $("#register").hide();
         });
     }
 
     function order_up(time) {
         var time = time || 1200;
-         $("#order:visible").animate({top: "-500px"}, time, function () {
+        $("#order:visible").animate({top: "-500px"}, time, function () {
             $("#order").hide();
         });
     }
@@ -104,7 +105,7 @@ $(function () {
         mainNav.find("li:last-child").remove();
         for (var i = 0; i < menu.length; i++) {
             // <span style="cursor: pointer" id="btn-orders" class="scroll-link">Мои заказы</span>
-            mainNav.append('<li><span data-link="'+menu[i].link+'" style="cursor: pointer" id="' + menu[i].id + '" class="scroll-link">' + menu[i].title + '</a></li>');
+            mainNav.append('<li><span data-link="' + menu[i].link + '" style="cursor: pointer" id="' + menu[i].id + '" class="scroll-link">' + menu[i].title + '</a></li>');
         }
         mainNav.append('<li><a href="/logout/" class="scroll-link new-link">Выход</a></li>');
         btn_orders();
@@ -116,7 +117,54 @@ $(function () {
             window.location = $(this).attr('data-link');
         });
     }
+
     btn_panel_admin();
+
+    function feedback_down() {
+
+    }
+
+    function feedback_up() {
+
+    }
+
+    $("#form-feedback").submit(function (e) {
+        e.preventDefault();
+        var self = $(this);
+        var data = {
+            'title': self.find("input[name=title]").val(),
+            'message': $('#form-feedback').find('input[name=message]').val()
+        };
+        console.log(data);
+        var url = self.attr('action');
+        $.ajax({
+                beforeSend: function (xhr, settings) {
+                    if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                        xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+                    }
+                },
+                method: 'POST',
+                url: url,
+                data: data,
+                success: function (data) {
+                    console.dir(data);
+                    if (data.status == 'ok') {
+                        feedback_up();
+                        $("#background").fadeOut(1200);
+                    }
+                    else if (data.status == 'error') {
+                        console.log(typeof data.message);
+                        form_errors = self.find('.form-errors');
+                        form_errors.text(data.message);
+                        form_errors.slideDown();
+                    }
+                },
+                error: function (xhr, str) {
+                    console.log("error: " + xhr.responseCode)
+                }
+            }
+        );
+    });
 
 
     $("#form-order").submit(function (e) {
@@ -147,14 +195,14 @@ $(function () {
                         console.dir(data);
                         //var msg = data.message['0']['0'];
                         //console.log(msg);
-                    //     if (data.message) {
-                    //         var form_errors = login.find(".form-errors");
-                    //         form_errors.text(msg.message);
-                    //         $('#login').animate({height: "280px"});
-                    //         form_errors.slideDown();
-                    //         login.find("input[name=username]").focus();
-                    //         login.find("input[name=username]").select();
-                    //     }
+                        //     if (data.message) {
+                        //         var form_errors = login.find(".form-errors");
+                        //         form_errors.text(msg.message);
+                        //         $('#login').animate({height: "280px"});
+                        //         form_errors.slideDown();
+                        //         login.find("input[name=username]").focus();
+                        //         login.find("input[name=username]").select();
+                        //     }
                     }
                 },
                 error: function (xhr, str) {

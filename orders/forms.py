@@ -16,7 +16,8 @@ class FeedBackForm(forms.ModelForm):
         widgets = {
             'title': forms.TextInput(attrs={'placeholder': 'Заголовок отзыва'}),
             'message': forms.Textarea(
-                attrs={'placeholder': 'Содержимое отзыва'}),
+                attrs={'placeholder': 'Содержимое отзыва',
+                       'rows': 5}),
         }
 
 

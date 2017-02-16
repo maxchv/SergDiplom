@@ -9,7 +9,7 @@ from .forms import UserFormView
 from .models import ClientProfile
 from gallery.models import Photo, HeadImage
 from orders.models import FeedBack, Order
-from orders.forms import OrderForm
+from orders.forms import OrderForm, FeedBackForm
 from random import shuffle
 
 
@@ -33,6 +33,7 @@ def landing(request):
         "login_form": AuthenticationForm(),
         'register_form': UserFormView(),
         'order_form': order_form,
+        'feedback_form': FeedBackForm(),
         'head_images': head_images,
         'photos': photos[:8],
         "comments": comments[:5]}
