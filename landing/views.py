@@ -14,6 +14,10 @@ from random import shuffle
 
 
 def landing(request):
+    if request.is_ajax():
+        return JsonResponse({'status': 'error',
+                             'user': 'nobody',
+                             'message': "Don't support ajax request"})
     # form_client = ClientForm(request.POST or None)
     photos = list(Photo.objects.all())
     shuffle(photos)

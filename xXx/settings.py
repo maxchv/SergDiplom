@@ -132,7 +132,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
 LOGIN_REDIRECT_URL = "landing"
-LOGIN_URL = "landing_login"
+#LOGIN_URL = "landing_login"
+LOGIN_URL = "landing"
 LOGOUT_URL = "landing_logout"
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "uploads")

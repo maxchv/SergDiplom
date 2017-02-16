@@ -133,7 +133,7 @@ $(function () {
         var self = $(this);
         var data = {
             'title': self.find("input[name=title]").val(),
-            'message': $('#form-feedback').find('input[name=message]').val()
+            'message': self.find('textarea[name=message]').val()
         };
         console.log(data);
         var url = self.attr('action');
