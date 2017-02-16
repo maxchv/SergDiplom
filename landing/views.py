@@ -8,7 +8,7 @@ from django.shortcuts import render
 from .forms import UserFormView
 from .models import ClientProfile
 from gallery.models import Photo, HeadImage
-from orders.models import FeedBack
+from orders.models import FeedBack, Order
 from orders.forms import OrderForm
 from random import shuffle
 
@@ -23,10 +23,16 @@ def landing(request):
     # if request.method == "POST" and form_client.is_valid():
     #     data = form_client.cleaned_data
     #     new_form = form_client.save()
+    order_form = OrderForm()
+    if request.user.is_authenticated():
+        last = Order.objects.order_by('-timestamp').filter(client=request.user).filter(phone__isnull=False).first()
+        if last:
+            order_form = OrderForm(initial={'phone': last.phone})
+
     context = {  # "form_client": form_client,
         "login_form": AuthenticationForm(),
         'register_form': UserFormView(),
-        'order_form': OrderForm(),
+        'order_form': order_form,
         'head_images': head_images,
         'photos': photos[:8],
         "comments": comments[:5]}

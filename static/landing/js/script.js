@@ -236,6 +236,9 @@ $(function () {
                         update_menu(data.menu);
                         login_up();
                         $("#background").fadeOut(1200);
+                        // setTimeout(function () {
+                        //     window.location = window.location;
+                        // }, 1200);
                     } else if (data.status == 'error') {
                         var msg = data.message['0']['0'];
                         console.log(msg);

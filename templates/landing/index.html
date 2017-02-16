@@ -4,43 +4,45 @@
 {% load thumbnail %}
 {% block content %}
 
-    <div id="order" hidden>
-        <div class="form">
-            <form action="{% url 'order_ajax' %}" method="post" id="form-order">
-                {% csrf_token %}
-                {{ order_form|crispy }}
-                <div>
-                    <button type="submit" class="btn btn-primary btn-right" id="btn-do-order">Заказать</button>
-                </div>
-            </form>
+{#    {% if user.is_authenticated %}#}
+        <div id="order" hidden>
+            <div class="form">
+                <form action="{% url 'order_ajax' %}" method="post" id="form-order">
+                    {% csrf_token %}
+                    {{ order_form|crispy }}
+                    <div>
+                        <button type="submit" class="btn btn-primary btn-right" id="btn-do-order">Заказать</button>
+                    </div>
+                </form>
+            </div>
         </div>
-    </div>
-
-    <div id="register" hidden>
-        <div class="form">
-            <form action="{% url 'registration_ajax' %}" method="post" id="form-register">
-                {% csrf_token %}
-                {{ register_form|crispy }}
-                <button type="submit" class="btn btn-primary btn-right" id="btn-register">Зарегистрироваться</button>
-            </form>
+{#    {% else %}#}
+        <div id="register" hidden>
+            <div class="form">
+                <form action="{% url 'registration_ajax' %}" method="post" id="form-register">
+                    {% csrf_token %}
+                    {{ register_form|crispy }}
+                    <button type="submit" class="btn btn-primary btn-right" id="btn-register">Зарегистрироваться
+                    </button>
+                </form>
+            </div>
         </div>
-    </div>
-
-    <div id="login" hidden>
-        <div class="form">
-{#            <form action="{% url 'landing_login' %}?next=/" method="post">#}
-            <form action="{% url 'login_ajax' %}" method="post" id="form-login">
-                {% csrf_token %}
-                <!-- as_p для того, чтобы каждый элемент формы был с новой строки -->
-                {{ login_form|crispy }}
-                <p class="form-errors"></p>
-{#                <a href="{% url "registration" %}" class="btn btn-primary">Регистрация</a>#}
-                <button type="button" class="btn btn-primary" id="btn-form-register">Регистрация</button>
-{#                <button type="submit" class="btn btn-primary btn-right" id="btn-login">Логин</button>#}
-                <button type="submit" class="btn btn-primary btn-right" id="btn-login">Логин</button>
-            </form>
+        <div id="login" hidden>
+            <div class="form">
+                {#            <form action="{% url 'landing_login' %}?next=/" method="post">#}
+                <form action="{% url 'login_ajax' %}" method="post" id="form-login">
+                    {% csrf_token %}
+                    <!-- as_p для того, чтобы каждый элемент формы был с новой строки -->
+                    {{ login_form|crispy }}
+                    <p class="form-errors"></p>
+                    {#                <a href="{% url "registration" %}" class="btn btn-primary">Регистрация</a>#}
+                    <button type="button" class="btn btn-primary" id="btn-form-register">Регистрация</button>
+                    {#                <button type="submit" class="btn btn-primary btn-right" id="btn-login">Логин</button>#}
+                    <button type="submit" class="btn btn-primary btn-right" id="btn-login">Логин</button>
+                </form>
+            </div>
         </div>
-    </div>
+{#    {% endif %}#}
     <div id="background"></div>
 
     {% include "include/carousel.html" %}
