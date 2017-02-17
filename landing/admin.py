@@ -33,4 +33,5 @@ class ClientProfileAdmin(admin.ModelAdmin):
 
 
 admin.site.register(ClientProfile, ClientProfileAdmin)
-# admin.site.register(Work_Time)
+#admin.site.register(Work_Time)
+admin.site.register(Address)

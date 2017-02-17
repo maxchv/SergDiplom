@@ -25,16 +25,16 @@ class ClientProfile(models.Model):
 
 
 class Master(models.Model):
-    full_name = models.CharField(max_length=100, verbose_name=' фио мастера')
-    contact_phone = models.CharField(max_length=20, verbose_name='контактный телефон')
-    master_photo = models.ImageField(blank=True, upload_to="landing", verbose_name=("фото мастера"))
+    full_name = models.CharField(max_length=100, verbose_name='ФИО мастера')
+    contact_phone = models.CharField(max_length=20, verbose_name='Контактный телефон')
+    master_photo = models.ImageField(blank=True, upload_to="master", verbose_name="Фото мастера")
 
     def __str__(self):
         return "Мастер:  {};  тел: {}".format(self.full_name, self.contact_phone)
 
     class Meta:
-        verbose_name = 'мастер'
-        verbose_name_plural = 'мастера'
+        verbose_name = 'Мастер'
+        verbose_name_plural = 'Мастера'
 
 
 class Work_Time(models.Model):
@@ -47,7 +47,25 @@ class Work_Time(models.Model):
         return self.customer
 
     class Meta:
-        verbose_name_plural = 'рабочее время'
-        verbose_name = 'рабочее время'
+        verbose_name_plural = 'Рабочее время'
+        verbose_name = 'Рабочее время'
 
 
+class Address(models.Model):
+    city = models.CharField(max_length=100, verbose_name='Город')
+    street = models.CharField(max_length=100, verbose_name='Улица')
+    building = models.CharField(max_length=100, verbose_name='Здание/дом')
+    additional = models.CharField(blank=True, max_length=200, verbose_name='Дополнительая информация')
+    office = models.CharField(max_length=250, verbose_name='Офис')
+    phone = models.CharField(max_length=25, verbose_name='Телефон', unique=True)
+    map_latitude = models.FloatField(blank=True, help_text='Для карты', null=True, verbose_name='Широта')
+    map_longitude = models.FloatField(blank=True, help_text='Для карты', null=True, verbose_name='Долгота')
+    vk = models.CharField(blank=True, max_length=250, null=True, verbose_name="VK")
+    instagram = models.CharField(blank=True, null=True, max_length=250, verbose_name="Instagram")
+
+    def __str__(self):
+        return self.office
+
+    class Meta:
+        verbose_name_plural = 'Адреса'
+        verbose_name = 'Адрес'

@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
     'landing',
     'crispy_forms',
     'easy_thumbnails',
@@ -139,3 +140,5 @@ LOGOUT_URL = "landing_logout"
 MEDIA_ROOT = os.path.join(BASE_DIR, "uploads")
 MEDIA_URL = "/media/"
 
+DECIMAL_SEPARATOR = '.'
+THOUSAND_SEPARATOR = ''
