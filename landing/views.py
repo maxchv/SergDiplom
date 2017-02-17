@@ -6,7 +6,7 @@ from django.http import HttpResponseNotFound
 from django.http import JsonResponse
 from django.shortcuts import render
 from .forms import UserFormView
-from .models import ClientProfile, Address
+from .models import ClientProfile, Address, Section
 from gallery.models import Photo, HeadImage
 from orders.models import FeedBack, Order
 from orders.forms import OrderForm, FeedBackForm
@@ -35,6 +35,7 @@ def landing(request):
 
     context = {  # "form_client": form_client,
         'address' : Address.objects.first(),
+        'about': Section.objects.first(),
         "login_form": AuthenticationForm(),
         'register_form': UserFormView(),
         'order_form': order_form,

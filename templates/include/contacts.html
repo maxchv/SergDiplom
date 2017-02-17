@@ -15,30 +15,23 @@
                     <div class="contact_info">
                         <div class="detail">
                             <h4>{{ address.office }}</h4>
-                            {#                            <h4>Торговый центр "Пассаж"(2 Этаж)</h4>#}
-                            {#                            <p>г. Новомосковск, Гетьманская, 37а (2 Этаж)</p>#}
                             <p>г. {{ address.city }}, {{ address.street }}, {{ address.building }}
                                 {% if address.additional %}({{ address.additional }}) {% endif %}</p>
                         </div>
                         <div class="detail">
                             <h4>Наш телефон:</h4>
-                            {#                            <p>093-90-92-633</p>#}
                             <p>{{ address.phone }}</p>
                         </div>
                     </div>
 
                     <ul class="social_links">
                         <li>
-                            <a class="btn btn-block btn-social btn-vk"
-                                    {#                               href="https://vk.com/albums228118349">#}
-                               href="{{ address.vk }}">
+                            <a class="btn btn-block btn-social btn-vk" href="{{ address.vk }}">
                                 <span class="fa fa-vk"></span>
                             </a>
                         </li>
                         <li>
-                            <a class="btn btn-block btn-social btn-instagram"
-                                    {#                               href="https://www.instagram.com/grishaeva_nails/">#}
-                               href="{{ address.instagram }}">
+                            <a class="btn btn-block btn-social btn-instagram" href="{{ address.instagram }}">
                                 <span class="fa fa-instagram"></span>
                             </a></li>
 
@@ -47,7 +40,6 @@
                 <div id="map" class="col-lg-8" style="width: 500px; height: 300px"></div>
                 <script>
                     function initMap() {
-                        {#                        var uluru = {lat: 48.637846, lng: 35.258512};#}
                         var uluru = {lat: {{ address.map_latitude|unlocalize }}, lng: {{address.map_longitude|unlocalize}} };
                         var map = new google.maps.Map(document.getElementById('map'), {
                             zoom: 16,

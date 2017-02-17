@@ -69,3 +69,16 @@ class Address(models.Model):
     class Meta:
         verbose_name_plural = 'Адреса'
         verbose_name = 'Адрес'
+
+
+class Section(models.Model):
+    title = models.CharField(max_length=100, verbose_name='Заголовок')
+    image = models.ImageField(blank=True, null=True, verbose_name='Изображение', upload_to='section')
+    content = models.TextField(verbose_name='Содержимое раздела')
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name_plural = 'Разделы'
+        verbose_name = 'Раздел'
