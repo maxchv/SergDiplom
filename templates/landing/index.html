@@ -6,7 +6,7 @@
 
     <div id="feedback" hidden>
             <div class="form">
-                <form action="{% url 'feedback_ajax' %}" method="post" id="form-feedback">
+                <form action="{% url 'orders:feedback_ajax' %}" method="post" id="form-feedback">
                     {% csrf_token %}
                     {{ feedback_form|crispy }}
                     <div class="output"></div>
@@ -23,7 +23,7 @@
 {#    {% if user.is_authenticated %}#}
         <div id="order" hidden>
             <div class="form">
-                <form action="{% url 'order_ajax' %}" method="post" id="form-order">
+                <form action="{% url 'orders:order_ajax' %}" method="post" id="form-order">
                     {% csrf_token %}
                     {{ order_form|crispy }}
                      <div class="output"></div>
@@ -56,9 +56,7 @@
                     {% csrf_token %}
                     {{ login_form|crispy }}
                     <div class="output"></div>
-                    {#                <a href="{% url "registration" %}" class="btn btn-primary">Регистрация</a>#}
                     <button type="button" class="btn btn-primary" id="btn-form-register">Регистрация</button>
-                    {#                <button type="submit" class="btn btn-primary btn-right" id="btn-login">Логин</button>#}
                     <button type="submit" class="btn btn-primary" id="btn-login">Логин</button>
                 </form>
             </div>

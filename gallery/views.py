@@ -1,8 +1,9 @@
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from .models import Photo
+
 from .forms import PhotoForm
+from .models import Photo
+
 
 @login_required
 def gallery(request):
@@ -17,7 +18,4 @@ def gallery(request):
             return render(request, "gallery/index.html", {"photos": photos, "form": form})
     form = PhotoForm()
     return render(request, "gallery/index.html", {"photos": photos, "form": form})
-
-
-
 

@@ -1,16 +1,17 @@
-from django.contrib.auth import authenticate, login
+from random import shuffle
+
+from django.contrib.auth import login
 from django.contrib.auth.forms import AuthenticationForm
-from django.core.exceptions import ValidationError
-from django.forms.utils import ErrorDict, ErrorList
+from django.forms.utils import ErrorList
 from django.http import HttpResponseNotFound
 from django.http import JsonResponse
 from django.shortcuts import render
+
+from gallery.models import Photo, HeadImage
+from orders.forms import OrderForm, FeedBackForm
+from orders.models import FeedBack, Order
 from .forms import UserFormView
 from .models import ClientProfile, Address, Section
-from gallery.models import Photo, HeadImage
-from orders.models import FeedBack, Order
-from orders.forms import OrderForm, FeedBackForm
-from random import shuffle
 
 
 def landing(request):
@@ -18,23 +19,19 @@ def landing(request):
         return JsonResponse({'status': 'error',
                              'user': 'nobody',
                              'message': "Don't support ajax request"})
-    # form_client = ClientForm(request.POST or None)
     photos = list(Photo.objects.all())
     shuffle(photos)
     comments = list(FeedBack.objects.filter(checked=True))
     shuffle(comments)
     head_images = HeadImage.objects.all()
-    # if request.method == "POST" and form_client.is_valid():
-    #     data = form_client.cleaned_data
-    #     new_form = form_client.save()
     order_form = OrderForm()
     if request.user.is_authenticated():
         last = Order.objects.order_by('-timestamp').filter(client=request.user).filter(phone__isnull=False).first()
         if last:
             order_form = OrderForm(initial={'phone': last.phone})
 
-    context = {  # "form_client": form_client,
-        'address' : Address.objects.first(),
+    context = {
+        'address': Address.objects.first(),
         'about': Section.objects.first(),
         "login_form": AuthenticationForm(),
         'register_form': UserFormView(),
@@ -44,10 +41,6 @@ def landing(request):
         'photos': photos[:8],
         "comments": comments[:5]}
     return render(request, 'landing/index.html', context)
-
-
-def registration(request):
-    return render(request, 'registration/login.html')
 
 
 def registration_ajax(request):
@@ -64,10 +57,8 @@ def registration_ajax(request):
                     return JsonResponse({'status': 'exception',
                                          'message': str(ex)})
                 return JsonResponse({'status': 'ok',
-                                     'message': 'Добро пожаловать'})
+                                     'message': 'Спасибо за регистрацию. Введите логин и пароль'})
             else:
-                error_message = [v.get_json_data() if v and isinstance(v, ErrorList) else v for k, v in
-                                 form.errors.items()]
                 return JsonResponse({'status': 'error',
                                      'message': str(form.errors)})
     return HttpResponseNotFound("<h1>Страница не найдена</h1>")
@@ -107,8 +98,6 @@ def login_ajax(request):
                                          ],
                                          'message': 'Добро пожаловать'})
             else:
-                error_message = [v.get_json_data() if v and isinstance(v, ErrorList) else v for k, v in
-                                 form.errors.items()]
                 return JsonResponse({'status': 'error',
                                      'message': str(form.errors)})
     return HttpResponseNotFound("<h1>Страница не найдена</h1>")

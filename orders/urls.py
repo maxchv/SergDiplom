@@ -14,12 +14,15 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from django.conf.urls import url
-from .views import index, feedback, feedback_ajax, order, order_ajax
+
+from .views import index, feedback_ajax, order_ajax
+
+app_name = 'orders'
 
 urlpatterns = [
-    url(r'^$', index, name="orders"),
-    url(r'^feedback/', feedback, name="feedback"),
+    # url(r'^$', index, name="orders"),
+    #url(r'^feedback/', feedback, name="feedback"),
     url(r'^feedback_ajax/', feedback_ajax, name="feedback_ajax"),
-    url(r'^order/', order, name="order"),
+    #url(r'^order/', order, name="order"),
     url(r'^order_ajax/', order_ajax, name="order_ajax"),
 ]

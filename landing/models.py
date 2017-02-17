@@ -1,8 +1,9 @@
+from django.contrib.auth.models import User
 from django.core.validators import RegexValidator
 from django.db import models
-from django.contrib.auth.models import User
 
 
+# FIXME: не используется. На будующее
 class ClientProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     phone = models.CharField(blank=True,
@@ -37,6 +38,7 @@ class Master(models.Model):
         verbose_name_plural = 'Мастера'
 
 
+# FIXME: Не использутеся. На будующее
 class Work_Time(models.Model):
     start_work_day = models.DateTimeField(verbose_name='начало рабочего дня')
     end_work_day = models.DateTimeField(verbose_name='конец рабочего дня')

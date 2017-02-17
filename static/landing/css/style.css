@@ -1406,8 +1406,6 @@ img {
     color: #222;
 }
 
-
-
 /* Footer
 ---------------------------------*/
 
@@ -2620,14 +2618,6 @@ section#experience {
     border-color: #0d0e0e;
 }
 
-/*#login, #admin, #register {*/
-    /*position: absolute;*/
-    /*height: 100%;*/
-    /*width: 100%;*/
-    /*padding-top: 80px;*/
-    /*background: black;*/
-/*}*/
-
 #login, #register, #order, #feedback {
     background: black;
     position: fixed;
@@ -2646,20 +2636,19 @@ section#experience {
 }
 
 #feedback {
-    top: 100px;
     height: 350px;
     top: -500px;
 }
 
 #register {
     display: block;
-    height: 430px;
+    height: 400px;
     top: -500px;
 }
 
 #register > .form,
 #login > .form
-#feedback > .form{
+#feedback > .form {
     width: 530px;
     margin: 0 auto;
 }
@@ -2668,6 +2657,7 @@ section#experience {
 #order > .form {
     margin-top: -20px;
 }
+
 #order {
     height: 320px;
     top: -500px;
@@ -2698,7 +2688,8 @@ section#experience {
 
 #btn-do-order,
 #btn-do-feedback,
-#btn-login{
+#btn-login,
+#btn-register{
     position: absolute;
     right: 40px;
 }
@@ -2725,6 +2716,7 @@ section#experience {
     height: 100px;
     /*line-height: 100px;*/
 }
+
 .navStyle ul li:last-child,
 .navStyle ul li {
     display: inline-block;
