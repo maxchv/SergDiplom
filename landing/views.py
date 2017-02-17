@@ -56,26 +56,20 @@ def registration_ajax(request):
             form = UserFormView(request.POST)
             if form.is_valid():
                 user = form.save(commit=False)
-                #username = form.cleaned_data.get('username')
-                #password = form.cleaned_data.get('password1')
-                #print('user: {} password: {}'.format(username, password))
-                #print(user.username, user.password, user.is_superuser)
                 try:
                     user.save()
                     client = ClientProfile.objects.create(user=user)
                     client.save()
                 except Exception as ex:
                     return JsonResponse({'status': 'exception',
-                                         'message': ex})
+                                         'message': str(ex)})
                 return JsonResponse({'status': 'ok',
-                                     'user': client.user.username,
-                                     'message': 'welcome'})
+                                     'message': 'Добро пожаловать'})
             else:
                 error_message = [v.get_json_data() if v and isinstance(v, ErrorList) else v for k, v in
                                  form.errors.items()]
                 return JsonResponse({'status': 'error',
-                                     'user': 'nobody',
-                                     'message': error_message})
+                                     'message': str(form.errors)})
     return HttpResponseNotFound("<h1>Страница не найдена</h1>")
 
 
@@ -89,7 +83,6 @@ def login_ajax(request):
                 login(request, user)
                 if user.is_superuser:
                     return JsonResponse({'status': 'ok',
-                                         'user': user.username,
                                          'menu': [
                                              {
                                                  'title': 'Админ панель',
@@ -100,7 +93,6 @@ def login_ajax(request):
                                          'message': 'welcome superuser'})
                 else:
                     return JsonResponse({'status': 'ok',
-                                         'user': user.username,
                                          'menu': [
                                              {
                                                  'title': 'Мои заказы',
@@ -113,12 +105,10 @@ def login_ajax(request):
                                                  'id': 'btn-feedback'
                                              },
                                          ],
-                                         'message': 'welcome client'})
+                                         'message': 'Добро пожаловать'})
             else:
                 error_message = [v.get_json_data() if v and isinstance(v, ErrorList) else v for k, v in
                                  form.errors.items()]
                 return JsonResponse({'status': 'error',
-                                     'user': 'nobody',
-                                     'menu': [],
-                                     'message': error_message})
+                                     'message': str(form.errors)})
     return HttpResponseNotFound("<h1>Страница не найдена</h1>")

@@ -42,6 +42,7 @@
                 <form action="{% url 'registration_ajax' %}" method="post" id="form-register">
                     {% csrf_token %}
                     {{ register_form|crispy }}
+                    <div class="output"></div>
                     <button type="submit" class="btn btn-primary"
                             id="btn-register">
                         Зарегистрироваться
@@ -54,7 +55,7 @@
                 <form action="{% url 'login_ajax' %}" method="post" id="form-login">
                     {% csrf_token %}
                     {{ login_form|crispy }}
-                    <p class="form-errors"></p>
+                    <div class="output"></div>
                     {#                <a href="{% url "registration" %}" class="btn btn-primary">Регистрация</a>#}
                     <button type="button" class="btn btn-primary" id="btn-form-register">Регистрация</button>
                     {#                <button type="submit" class="btn btn-primary btn-right" id="btn-login">Логин</button>#}

@@ -150,9 +150,10 @@ $(function () {
         });
     }
 
-    function process_form(form, data, callback) {
+    function process_form(form, get_data, callback) {
         form.submit(function (e) {
             e.preventDefault();
+            var data = get_data();
             console.log(data);
             var url = form.attr('action');
             $.ajax({
@@ -175,10 +176,12 @@ $(function () {
 
     process_form(
         $('#form-feedback'),
-        {
-            'csrfmiddlewaretoken': $('#form-feedback').find("input[name=csrfmiddlewaretoken]").val(),
-            'title': $('#form-feedback').find("input[name=title]").val(),
-            'message': $('#form-feedback').find('textarea[name=message]').val()
+        function () {
+            return {
+                'csrfmiddlewaretoken': $('#form-feedback').find("input[name=csrfmiddlewaretoken]").val(),
+                'title': $('#form-feedback').find("input[name=title]").val(),
+                'message': $('#form-feedback').find('textarea[name=message]').val()
+            }
         },
         function (data) {
             output = $('#form-feedback').find('.output');
@@ -242,12 +245,15 @@ $(function () {
 
     process_form(
         $('#form-order'),
-        {
-            'csrfmiddlewaretoken': $('#form-order').find("input[name=csrfmiddlewaretoken]").val(),
-            'datetime': $('#form-order').find("input[name=datetime]").val(),
-            'phone': $('#form-order').find("input[name=phone]").val(),
-            'master': $('#form-order').find("select[name=master]").val()
-        },
+        function () {
+            return {
+                'csrfmiddlewaretoken': $('#form-order').find("input[name=csrfmiddlewaretoken]").val(),
+                'datetime': $('#form-order').find("input[name=datetime]").val(),
+                'phone': $('#form-order').find("input[name=phone]").val(),
+                'master': $('#form-order').find("select[name=master]").val()
+            }
+        }
+        ,
         function (data) {
             output = $('#form-order').find('.output');
             output.empty();
@@ -360,53 +366,82 @@ $(function () {
         );
     });
 
-    // аутентификация
-    $("#form-login").submit(function (e) {
-        e.preventDefault();
-        var login = $(this);
-        var data = {
-            'username': login.find("input[name=username]").val(),
-            'password': login.find("input[name=password]").val()
-        };
-        var url = $('#form-login').attr('action');
-        console.log('url: ' + url);
-        $.ajax({
-                beforeSend: function (xhr, settings) {
-                    if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
-                        xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
-                    }
-                },
-                method: 'POST',
-                url: url,
-                data: data,
-                success: function (data) {
-                    console.dir(data);
-                    if (data.status == 'ok') {
-                        update_menu(data.menu);
-                        login_up();
-                        $("#background").fadeOut(1200);
-                        // setTimeout(function () {
-                        //     window.location = window.location;
-                        // }, 1200);
-                    } else if (data.status == 'error') {
-                        var msg = data.message['0']['0'];
-                        console.log(msg);
-                        if (data.message) {
-                            var form_errors = login.find(".form-errors");
-                            output.text(msg.message);
-                            $('#login').animate({height: "280px"});
-                            output.slideDown();
-                            login.find("input[name=username]").focus();
-                            login.find("input[name=username]").select();
-                        }
-                    }
-                },
-                error: function (xhr, str) {
-                    console.log("error: " + xhr.responseCode)
-                }
+    process_form(
+        $('#form-login'),
+        function () {
+            return {
+                'csrfmiddlewaretoken': $('#form-login').find("input[name=csrfmiddlewaretoken]").val(),
+                'username': $('#form-login').find("input[name=username]").val(),
+                'password': $('#form-login').find("input[name=password]").val()
             }
-        );
-    });
+        },
+        function (data) {
+            output = $('#form-login').find('.output');
+            output.empty();
+            output.append($.parseHTML(data.message.replace("__all__",'')));
+            output.slideDown();
+            $('#login').animate({'height': '295px'});
+            if (data.status == 'ok') {
+                update_menu(data.menu);
+                setTimeout(function () {
+                    form_up($('#login'));
+                    $("#background").fadeOut(1200);
+                    // clean data
+                    $('#form-login').find("input[name=password]").val('');
+                    output.empty();
+                    $('#login').css({'height': '250px'});
+                }, 2000);
+            }
+        }
+    );
+
+    // аутентификация
+    // $("#form-login").submit(function (e) {
+    //     e.preventDefault();
+    //     var login = $(this);
+    //     var data = {
+    //         'username': login.find("input[name=username]").val(),
+    //         'password': login.find("input[name=password]").val()
+    //     };
+    //     var url = $('#form-login').attr('action');
+    //     console.log('url: ' + url);
+    //     $.ajax({
+    //             beforeSend: function (xhr, settings) {
+    //                 if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+    //                     xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+    //                 }
+    //             },
+    //             method: 'POST',
+    //             url: url,
+    //             data: data,
+    //             success: function (data) {
+    //                 console.dir(data);
+    //                 if (data.status == 'ok') {
+    //                     update_menu(data.menu);
+    //                     login_up();
+    //                     $("#background").fadeOut(1200);
+    //                     // setTimeout(function () {
+    //                     //     window.location = window.location;
+    //                     // }, 1200);
+    //                 } else if (data.status == 'error') {
+    //                     var msg = data.message['0']['0'];
+    //                     console.log(msg);
+    //                     if (data.message) {
+    //                         var form_errors = login.find(".form-errors");
+    //                         output.text(msg.message);
+    //                         $('#login').animate({height: "280px"});
+    //                         output.slideDown();
+    //                         login.find("input[name=username]").focus();
+    //                         login.find("input[name=username]").select();
+    //                     }
+    //                 }
+    //             },
+    //             error: function (xhr, str) {
+    //                 console.log("error: " + xhr.responseCode)
+    //             }
+    //         }
+    //     );
+    // });
 
     // маски
     $("[type=tel]").mask("(099) 999-99-99");
