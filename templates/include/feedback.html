@@ -2,78 +2,54 @@
 {% load crispy_forms_tags %}
 {% load thumbnail %}
 
-<section id="experience">
-        <div class="container">
-            <section id="news" class="white-bg padding-top-bottom">
-                <div class="section-title">
-                    <h2>Отзывы </h2>
-                    <h6>Lorem ipsum dolor sit amet, consectetur Morbi sagittis, sem quisci ipsum</h6>
+<section id="experience" class="content">
+    <div class="container">
+        <section class="white-bg padding-top-bottom">
+            <div class="section-title">
+                <h2>Отзывы </h2>
+{#                <h6>Lorem ipsum dolor sit amet, consectetur Morbi sagittis, sem quisci ipsum</h6>#}
 
-                </div>
-                <section id="carousel">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-8 col-md-offset-2">
-                                <div class="quote"><i class="fa fa-quote-left fa-4x"></i></div>
-                                <div class="carousel slide" id="fade-quote-carousel" data-ride="carousel"
-                                     data-interval="3000">
-                                    <!-- Carousel indicators -->
-                                    <ol class="carousel-indicators">
-                                        {% for comment in comments %}
-                                            {% if forloop.first %}
-                                                <li data-target="#fade-quote-carousel" data-slide-to="{{ forloop.counter0 }}" class="active"></li>
-                                            {% else %}
-                                                <li data-target="#fade-quote-carousel" data-slide-to="{{ forloop.counter0 }}"></li>
-                                            {% endif %}
-                                        {% endfor %}
-                                    </ol>
-                                    <!-- Carousel items -->
-                                    <div class="carousel-inner">
-                                        {% for comment in comments %}
-                                            {% if forloop.first %}
-                                                <div class="active item">
-                                            {% else %}
-                                                <div class="item">
-                                            {% endif %}
-                                            <blockquote>
-                                                <p>{{ comment.message }}</p>
-                                            </blockquote>
-                                            <div class="profile-circle" style="background-color: rgba(0,0,0,.2);"></div>
-                                        </div>
-                                        {% endfor %}
-{#                                        <div class="item">#}
-{#                                            <blockquote>#}
-{#                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem,#}
-{#                                                    veritatis nulla eum laudantium totam tempore optio doloremque#}
-{#                                                    laboriosam#}
-{#                                                    quas, quos eaque molestias odio aut eius animi. Impedit temporibus#}
-{#                                                    nisi#}
-{#                                                    accusamus.</p>#}
-{#                                            </blockquote>#}
-{#                                            <div class="profile-circle"#}
-{#                                                 style="background-color: rgba(77,5,51,.2);"></div>#}
-{#                                        </div>#}
-{#                                        <div class="item">#}
-{#                                            <blockquote>#}
-{#                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem,#}
-{#                                                    veritatis nulla eum laudantium totam tempore optio doloremque#}
-{#                                                    laboriosam#}
-{#                                                    quas, quos eaque molestias odio aut eius animi. Impedit temporibus#}
-{#                                                    nisi#}
-{#                                                    accusamus.</p>#}
-{#                                            </blockquote>#}
-{#                                            <div class="profile-circle"#}
-{#                                                 style="background-color: rgba(145,169,216,.2);"></div>#}
-{#                                        </div>#}
+            </div>
+            <section id="carousel">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-2">
+                            <div class="quote"><i class="fa fa-quote-left fa-4x"></i></div>
+                            <div class="carousel slide" id="fade-quote-carousel" data-ride="carousel"
+                                 data-interval="3000">
+                                <!-- Carousel indicators -->
+                                <ol class="carousel-indicators">
+                                    {% for comment in comments %}
+                                        {% if forloop.first %}
+                                            <li data-target="#fade-quote-carousel"
+                                                data-slide-to="{{ forloop.counter0 }}" class="active"></li>
+                                        {% else %}
+                                            <li data-target="#fade-quote-carousel"
+                                                data-slide-to="{{ forloop.counter0 }}"></li>
+                                        {% endif %}
+                                    {% endfor %}
+                                </ol>
+                                <!-- Carousel items -->
+                                <div class="carousel-inner">
+                                    {% for comment in comments %}
+                                        {% if forloop.first %}
+                                            <div class="active item">
+                                        {% else %}
+                                            <div class="item">
+                                        {% endif %}
+                                    <blockquote>
+                                        <p>{{ comment.message }} <strong>/{{ user.username }}/</strong></p>
+                                    </blockquote>
+{#                                    <div class="profile-circle" style="background-color: rgba(0,0,0,.2);"></div>#}
+                                    </div>
+                                    {% endfor %}
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-
-                    {#    </div>#}
-                </section>
+                </div>
             </section>
-        </div>
-    </section>
+        </section>
+    </div>
+</section>

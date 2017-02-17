@@ -4,12 +4,12 @@
 {% load thumbnail %}
 {% block content %}
 
-    <div id="feedback">
+    <div id="feedback" hidden>
             <div class="form">
                 <form action="{% url 'feedback_ajax' %}" method="post" id="form-feedback">
                     {% csrf_token %}
                     {{ feedback_form|crispy }}
-                    <p class="form-errors"></p>
+                    <div class="output"></div>
                     <div>
                         <button type="submit" class="btn btn-primary"
                                 id="btn-do-feedback">
@@ -26,6 +26,7 @@
                 <form action="{% url 'order_ajax' %}" method="post" id="form-order">
                     {% csrf_token %}
                     {{ order_form|crispy }}
+                     <div class="output"></div>
                     <div>
                         <button type="submit" class="btn btn-primary"
                                 id="btn-do-order">

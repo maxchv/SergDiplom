@@ -33,6 +33,7 @@ $(function () {
     }
 
     btn_orders();
+
     function register_down(time) {
         var time = time || 1200;
         $("#login:visible").animate({top: "-300px"}, time, function () {
@@ -75,6 +76,7 @@ $(function () {
         login_up();
         register_up();
         order_up();
+        form_up($('#feedback'));
     });
 
     // using jQuery
@@ -120,97 +122,195 @@ $(function () {
 
     btn_panel_admin();
 
-    function feedback_down() {
 
+    function form_down(form, time, delay, top) {
+        var time = time || 1200;
+        var delay = delay || 0;
+        var top = top || "200px";
+        $('#background').delay(delay).fadeIn(time);
+        form.show().delay(delay).animate({top: top}, time, function () {
+            form.find('input:nth-of-type(2)').focus();
+        });
     }
 
-    function feedback_up() {
-
+    function btn_feedback() {
+        $("#btn-feedback").click(function () {
+            form_down($("#feedback"));
+        });
     }
 
-    $("#form-feedback").submit(function (e) {
-        e.preventDefault();
-        var self = $(this);
-        var data = {
-            'title': self.find("input[name=title]").val(),
-            'message': self.find('textarea[name=message]').val()
-        };
-        console.log(data);
-        var url = self.attr('action');
-        $.ajax({
-                beforeSend: function (xhr, settings) {
-                    if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
-                        xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
-                    }
-                },
-                method: 'POST',
-                url: url,
-                data: data,
-                success: function (data) {
-                    console.dir(data);
-                    if (data.status == 'ok') {
-                        feedback_up();
-                        $("#background").fadeOut(1200);
-                    }
-                    else if (data.status == 'error') {
-                        console.log(typeof data.message);
-                        form_errors = self.find('.form-errors');
-                        form_errors.text(data.message);
-                        form_errors.slideDown();
-                    }
-                },
-                error: function (xhr, str) {
-                    console.log("error: " + xhr.responseCode)
-                }
-            }
-        );
-    });
+    btn_feedback();
 
+    function form_up(form, time, top) {
+        var time = time || 1200;
+        var top = top || '-500px';
+        form.animate({top: top}, time, function () {
+            form.hide();
+        });
+    }
 
-    $("#form-order").submit(function (e) {
-        e.preventDefault();
-        var self = $(this);
-        var data = {
-            'datetime': self.find("input[name=datetime]").val(),
-            'phone': self.find("input[name=phone]").val(),
-            'master': self.find("select[name=master]").val()
-        };
-        var url = self.attr('action');
-        $.ajax({
-                beforeSend: function (xhr, settings) {
-                    if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
-                        xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+    function process_form(form, data, callback) {
+        form.submit(function (e) {
+            e.preventDefault();
+            console.log(data);
+            var url = form.attr('action');
+            $.ajax({
+                    beforeSend: function (xhr, settings) {
+                        if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                            xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+                        }
+                    },
+                    method: 'POST',
+                    url: url,
+                    data: data,
+                    success: callback,
+                    error: function (xhr, str) {
+                        console.log("error: " + xhr.responseCode)
                     }
-                },
-                method: 'POST',
-                url: url,
-                data: data,
-                success: function (data) {
-                    console.dir(data);
-                    if (data.status == 'ok') {
-                        order_up();
-                        $("#background").fadeOut(1200);
-                    }
-                    else if (data.status == 'error') {
-                        console.dir(data);
-                        //var msg = data.message['0']['0'];
-                        //console.log(msg);
-                        //     if (data.message) {
-                        //         var form_errors = login.find(".form-errors");
-                        //         form_errors.text(msg.message);
-                        //         $('#login').animate({height: "280px"});
-                        //         form_errors.slideDown();
-                        //         login.find("input[name=username]").focus();
-                        //         login.find("input[name=username]").select();
-                        //     }
-                    }
-                },
-                error: function (xhr, str) {
-                    console.log("error: " + xhr.responseCode)
                 }
+            );
+        });
+    }
+
+    process_form(
+        $('#form-feedback'),
+        {
+            'csrfmiddlewaretoken': $('#form-feedback').find("input[name=csrfmiddlewaretoken]").val(),
+            'title': $('#form-feedback').find("input[name=title]").val(),
+            'message': $('#form-feedback').find('textarea[name=message]').val()
+        },
+        function (data) {
+            output = $('#form-feedback').find('.output');
+            output.empty();
+            output.append($.parseHTML(data.message));
+            output.slideDown();
+            $('#feedback').animate({'height': '400px'});
+            if (data.status == 'ok') {
+                setTimeout(function () {
+                    form_up($('#feedback'));
+                    $("#background").fadeOut(1200);
+                    // clean data
+                    $('#form-feedback').find('textarea[name=message]').val('');
+                    $('#form-feedback').find("input[name=title]").val('');
+                    output.empty();
+                    $('#feedback').css({'height': '350px'});
+                }, 2000);
             }
-        );
-    });
+        }
+    );
+
+    //
+    //
+    // $("#form-feedback").submit(function (e) {
+    //     e.preventDefault();
+    //     var self = $(this);
+    //     var data = {
+    //         'title': self.find("input[name=titl]").val(),
+    //         'message': self.find('textarea[name=message]').val()
+    //     };
+    //     console.log(data);
+    //     var url = self.attr('action');
+    //     $.ajax({
+    //             beforeSend: function (xhr, settings) {
+    //                 if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+    //                     xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+    //                 }
+    //             },
+    //             method: 'POST',
+    //             url: url,
+    //             data: data,
+    //             success: function (data) {
+    //                 console.dir(data);
+    //                 if (data.status == 'ok') {
+    //                     feedback_up();
+    //                     $("#background").fadeOut(1200);
+    //                 }
+    //                 else if (data.status == 'error') {
+    //                     console.log(typeof data.message);
+    //                     output = self.find('.form-errors');
+    //                     output.append($.parseHTML(data.message));
+    //                     output.slideDown();
+    //                 }
+    //             },
+    //             error: function (xhr, str) {
+    //                 console.log("error: " + xhr.responseCode)
+    //             }
+    //         }
+    //     );
+    // });
+
+    process_form(
+        $('#form-order'),
+        {
+            'csrfmiddlewaretoken': $('#form-order').find("input[name=csrfmiddlewaretoken]").val(),
+            'datetime': $('#form-order').find("input[name=datetime]").val(),
+            'phone': $('#form-order').find("input[name=phone]").val(),
+            'master': $('#form-order').find("select[name=master]").val()
+        },
+        function (data) {
+            output = $('#form-order').find('.output');
+            output.empty();
+            output.append($.parseHTML(data.message));
+            output.slideDown();
+            $('#order').animate({'height': '360px'});
+            if (data.status == 'ok') {
+                setTimeout(function () {
+                    form_up($('#order'));
+                    $("#background").fadeOut(1200);
+                    // clean data
+                    $('#form-order').find("input[name=datetime]").val('');
+                    $('#form-order').find("select[name=master]").val('');
+                    output.empty();
+                    $('#order').css({'height': '320px'});
+                }, 2000);
+            }
+        }
+    );
+
+    // $("#form-order").submit(function (e) {
+    //     e.preventDefault();
+    //     var self = $(this);
+    //     var data = {
+    //         'datetime': self.find("input[name=datetime]").val(),
+    //         'phone': self.find("input[name=phone]").val(),
+    //         'master': self.find("select[name=master]").val()
+    //     };
+    //     var url = self.attr('action');
+    //     $.ajax({
+    //             beforeSend: function (xhr, settings) {
+    //                 if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+    //                     xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+    //                 }
+    //             },
+    //             method: 'POST',
+    //             url: url,
+    //             data: data,
+    //             success: function (data) {
+    //                 console.dir(data);
+    //                 if (data.status == 'ok') {
+    //                     order_up();
+    //                     $("#background").fadeOut(1200);
+    //                 }
+    //                 else if (data.status == 'error') {
+    //                     console.dir(data);
+    //                     //var msg = data.message['0']['0'];
+    //                     //console.log(msg);
+    //                     //     if (data.message) {
+    //                     //         var output = login.find(".form-errors");
+    //                     //         output.text(msg.message);
+    //                     //         $('#login').animate({height: "280px"});
+    //                     //         output.slideDown();
+    //                     //         login.find("input[name=username]").focus();
+    //                     //         login.find("input[name=username]").select();
+    //                     //     }
+    //                 }
+    //             },
+    //             error: function (xhr, str) {
+    //                 console.log("error: " + xhr.responseCode)
+    //             }
+    //         }
+    //     );
+    // });
 
     // регистрация
     $("#form-register").submit(function (e) {
@@ -243,10 +343,10 @@ $(function () {
                     //     var msg = data.message['0']['0'];
                     //     console.log(msg);
                     //     if (data.message) {
-                    //         var form_errors = login.find(".form-errors");
-                    //         form_errors.text(msg.message);
+                    //         var output = login.find(".form-errors");
+                    //         output.text(msg.message);
                     //         $('#login').animate({height: "280px"});
-                    //         form_errors.slideDown();
+                    //         output.slideDown();
                     //         login.find("input[name=username]").focus();
                     //         login.find("input[name=username]").select();
                     //     }
@@ -292,9 +392,9 @@ $(function () {
                         console.log(msg);
                         if (data.message) {
                             var form_errors = login.find(".form-errors");
-                            form_errors.text(msg.message);
+                            output.text(msg.message);
                             $('#login').animate({height: "280px"});
-                            form_errors.slideDown();
+                            output.slideDown();
                             login.find("input[name=username]").focus();
                             login.find("input[name=username]").select();
                         }

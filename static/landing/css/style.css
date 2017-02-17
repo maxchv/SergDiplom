@@ -2648,6 +2648,7 @@ section#experience {
 #feedback {
     top: 100px;
     height: 350px;
+    top: -500px;
 }
 
 #register {
@@ -2713,4 +2714,14 @@ section#experience {
 
 .form {
     margin: 0 40px 0 30px;
+}
+
+.errorlist {
+    display: inline-block;
+    padding: 0 5px;
+}
+
+#experience .carousel-inner {
+    height: 100px;
+    /*line-height: 100px;*/
 }

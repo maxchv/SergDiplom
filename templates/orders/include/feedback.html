@@ -7,7 +7,7 @@
     <div class="container">
     <section class="page_section">
             <div class="feedback_section">
-                <h2 id="orders">Мои заказы</h2>
+                <h2>Мои заказы</h2>
             </div>
             {% for order in orders %}
             <div class="row">
@@ -18,23 +18,23 @@
                 </div>
             </div>
             {% endfor %}
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 wow fadeInLeft delay-06s">
-                    <div class="form">
-                        <form action="{% url 'order' %}" method="post">
-                            {% csrf_token %}
-                            {{ form_order|crispy }}
-                            <div>
-                                <button type="submit" class="btn btn-primary">Заказать</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
+{#            <div class="row">#}
+{#                <div class="col-lg-8 col-lg-offset-2 wow fadeInLeft delay-06s">#}
+{#                    <div class="form">#}
+{#                        <form action="{% url 'order' %}" method="post">#}
+{#                            {% csrf_token %}#}
+{#                            {{ form_order|crispy }}#}
+{#                            <div>#}
+{#                                <button type="submit" class="btn btn-primary">Заказать</button>#}
+{#                            </div>#}
+{#                        </form>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
         </section>
         <section class="page_section">
             <div class="feedback_section">
-                <h2 id="feedback">Мои отзывы</h2>
+                <h2>Мои отзывы</h2>
             </div>
             {% for feedback in feedbacks %}
             <div class="row">
@@ -45,19 +45,19 @@
                 </div>
             </div>
             {% endfor %}
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 wow fadeInLeft delay-06s">
-                    <div class="form">
-                        <form action="{% url 'feedback' %}" method="post">
-                            {% csrf_token %}
-                            {{ form_feedback|crispy }}
-                            <div>
-                                <button type="submit" class="btn btn-primary">Отправить</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
+{#            <div class="row">#}
+{#                <div class="col-lg-8 col-lg-offset-2 wow fadeInLeft delay-06s">#}
+{#                    <div class="form">#}
+{#                        <form action="{% url 'feedback' %}" method="post">#}
+{#                            {% csrf_token %}#}
+{#                            {{ form_feedback|crispy }}#}
+{#                            <div>#}
+{#                                <button type="submit" class="btn btn-primary">Отправить</button>#}
+{#                            </div>#}
+{#                        </form>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
         </section>
     </div>
 

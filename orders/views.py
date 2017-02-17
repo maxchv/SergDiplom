@@ -48,12 +48,10 @@ def feedback_ajax(request):
             feedback.draft = True
             feedback.save()
             return JsonResponse({'status': 'ok',
-                                 'user': request.user.username,
-                                 'message': 'feedback saved successfully'})
+                                 'message': '<h3>Спасибо за отзыв</h3>'})
         else:
             print(form.errors)
             return JsonResponse({'status': 'error',
-                                 'user': request.user.username,
                                  'message': str(form.errors)})
     return redirect("landing")
 
@@ -78,8 +76,7 @@ def order_ajax(request):
             order_data.client = request.user
             order_data.save()
             return JsonResponse({'status': 'ok',
-                                 'user': request.user.username,
-                                 'message': 'order saved successfully'})
+                                 'message': '<h3>Заказ добавлен</h3>'})
         else:
             print(form.errors)
             return JsonResponse({'status': 'error',

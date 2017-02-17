@@ -17,39 +17,20 @@ class ClientProfile(models.Model):
     photo = models.ImageField(blank=True, verbose_name="Аватарка", upload_to="clients")
 
     class Meta:
-        verbose_name='Клиент'
-        verbose_name_plural='Клиенты'
+        verbose_name = 'Профиль клиента'
+        verbose_name_plural = 'Профили клиентов'
 
     def __str__(self):
         return self.user.username
-
-# class Client(models.Model):
-#     id = models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')
-#     email = models.EmailField()
-#     first_name = models.CharField(max_length= 100, verbose_name= 'имя')
-#     middle_name = models.CharField(max_length= 100, verbose_name='отчество')
-#     last_name = models.CharField(max_length= 100, verbose_name= 'фамилия')
-#     phone = models.CharField(max_length=50, verbose_name='телефон')
-#     message = models.TextField(max_length= 500, blank=True, verbose_name='сообщение')
-#     master=models.ForeignKey('Master')
-#
-#     def __str__(self):
-#         return "Пользователь: %s почта: %s" % (self.first_name, self.email)
-#
-#     class Meta:
-#         verbose_name = 'Клиент'
-#         verbose_name_plural = 'Клиенты'
 
 
 class Master(models.Model):
     full_name = models.CharField(max_length=100, verbose_name=' фио мастера')
     contact_phone = models.CharField(max_length=20, verbose_name='контактный телефон')
-    master_photo = models.ImageField(upload_to="landing", verbose_name=("фото мастера"), blank=True)
-
-    # client = models.ForeignKey(Client)
+    master_photo = models.ImageField(blank=True, upload_to="landing", verbose_name=("фото мастера"))
 
     def __str__(self):
-        return "Мастер:  %s; " "  тел: %s" % (self.full_name, self.contact_phone)
+        return "Мастер:  {};  тел: {}".format(self.full_name, self.contact_phone)
 
     class Meta:
         verbose_name = 'мастер'
@@ -68,3 +49,5 @@ class Work_Time(models.Model):
     class Meta:
         verbose_name_plural = 'рабочее время'
         verbose_name = 'рабочее время'
+
+
