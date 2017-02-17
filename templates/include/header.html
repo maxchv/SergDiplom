@@ -1,46 +1,60 @@
 {% load staticfiles %}
 <header id="header_wrapper">
-        <div class="container">
-            <div class="header_box">
-                <!--<div class="logo"><a href="#">Resume</a></div>-->
-                <nav class="navbar navbar-inverse" role="navigation">
-                    <div class="navbar-header">
-                        <button type="button" id="nav-toggle" class="navbar-toggle" data-toggle="collapse"
-                                data-target="#main-nav"><span class="sr-only">Toggle navigation</span> <span
-                                class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
-                        </button>
-                    </div>
-                    <div id="main-nav" class="collapse navbar-collapse navStyle">
-                        <ul class="nav navbar-nav" id="mainNav">
-                            <li class="active"><a href="{% url "landing" %}#carousel" class="scroll-link">Главная</a></li>
-                            <li><a href="{% url "landing" %}#aboutUs" class="scroll-link">О Нас</a></li>
-                            <li><a href="{% url "landing" %}#service" class="scroll-link">Услуги </a></li>
-                            <li><a href="{% url "landing" %}#Portfolio" class="scroll-link">Галлерея</a></li>
-                            <li><a href="{% url "landing" %}#experience" class="scroll-link">Отзывы</a></li>
-                            <li><a href="{% url "landing" %}#contact" class="scroll-link">Контакты</a></li>
-                            {% if user.is_authenticated %}
-                                {% if user.is_superuser %}
-{#                                    <li><a href="{% url "gallery" %}#admin" class="scroll-link">Админ панель</a></li>#}
-{#                                    <li><a href="/admin" class="scroll-link">Админ панель</a></li>#}
-                                    <li>
-                                    <span data-link="/admin" style="cursor: pointer" id="btn-admin-panel" class="scroll-link">
+    <div class="container">
+        <div class="header_box">
+            <!--<div class="logo"><a href="#">Resume</a></div>-->
+            <nav class="navbar navbar-inverse" role="navigation">
+                <div class="navbar-header">
+                    <button type="button" id="nav-toggle" class="navbar-toggle" data-toggle="collapse"
+                            data-target="#main-nav"><span class="sr-only">Toggle navigation</span> <span
+                            class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div id="main-nav" class="collapse navbar-collapse navStyle">
+                    <ul class="nav navbar-nav" id="mainNav">
+                        <li class="active"><a href="{% url "landing" %}#carousel" class="scroll-link">Главная</a></li>
+                        <li><a href="{% url "landing" %}#aboutUs" class="scroll-link">О Нас</a></li>
+                        <li><a href="{% url "landing" %}#service" class="scroll-link">Услуги </a></li>
+                        <li><a href="{% url "landing" %}#Portfolio" class="scroll-link">Галлерея</a></li>
+                        <li><a href="{% url "landing" %}#experience" class="scroll-link">Отзывы</a></li>
+                        <li><a href="{% url "landing" %}#contact" class="scroll-link">Контакты</a></li>
+                        {% if user.is_authenticated %}
+                            {% if user.is_superuser %}
+                                <li>
+                                    <span data-link="/admin" style="cursor: pointer" id="btn-admin-panel"
+                                          class="scroll-link">
                                         Админ панель
                                     </span>
-                                    </li>
-                                {% else %}
-                                    <li><span style="cursor: pointer" id="btn-orders" class="scroll-link">Заказать</span></li>
-                                    <li><span style="cursor: pointer" id="btn-feedback" class="scroll-link">Мои отзывы</span></li>
-                                {% endif %}
-                                <li><a href="{% url "landing_logout" %}" class="scroll-link new-link">Выход</a></li>
+                                </li>
                             {% else %}
-{#                                <li><a href="#login" class="scroll-link">Вход</a></li>#}
-                                <li><span style="cursor:pointer" id="enter" class="scroll-link">Вход</span></li>
-{#                                <li><a href="{% url "registration" %}" class="scroll-link" id="r1">Регистрация</a></li>#}
+                                <li><span style="cursor: pointer" id="btn-orders" class="scroll-link">Заказать</span>
+                                </li>
+                                <li><span style="cursor: pointer" id="btn-feedback"
+                                          class="scroll-link">Мои отзывы</span></li>
                             {% endif %}
-                        </ul>
-                    </div>
-                    {#        </div>#}
-                </nav>
-            </div>
+                            <li><a href="{% url "landing_logout" %}" class="scroll-link new-link">Выход</a></li>
+                        {% else %}
+                            <li><span style="cursor:pointer" id="enter" class="scroll-link">Вход</span></li>
+                        {% endif %}
+                        {% if address.vk %}
+                            <li class="social">
+                                <a class="btn btn-block btn-social btn-vk" href="{{ address.vk }}" title="Вконтакте">
+                                    <span class="fa fa-vk"></span>
+                                </a>
+                            </li>
+                        {% endif %}
+                        {% if  address.instagram %}
+                            <li class="social">
+                                <a class="btn btn-block btn-social btn-instagram" href="{{ address.instagram }}"
+                                   title="Instagram">
+                                    <span class="fa fa-instagram"></span>
+                                </a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+                {#        </div>#}
+            </nav>
         </div>
-    </header>
+    </div>
+</header>

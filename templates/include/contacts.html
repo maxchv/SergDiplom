@@ -25,35 +25,45 @@
                     </div>
 
                     <ul class="social_links">
-                        <li>
-                            <a class="btn btn-block btn-social btn-vk" href="{{ address.vk }}">
-                                <span class="fa fa-vk"></span>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="btn btn-block btn-social btn-instagram" href="{{ address.instagram }}">
-                                <span class="fa fa-instagram"></span>
-                            </a></li>
-
+                        {% if address.vk %}
+                            <li>
+                                <a class="btn btn-block btn-social btn-vk" href="{{ address.vk }}" title="Вконтакте">
+                                    <span class="fa fa-vk"></span>
+                                </a>
+                            </li>
+                        {% endif %}
+                        {% if address.instagram %}
+                            <li>
+                                <a class="btn btn-block btn-social btn-instagram" href="{{ address.instagram }}"
+                                   title="Instagram">
+                                    <span class="fa fa-instagram"></span>
+                                </a>
+                            </li>
+                        {% endif %}
                     </ul>
                 </div>
                 <div id="map" class="col-lg-8" style="width: 500px; height: 300px"></div>
-                <script>
-                    function initMap() {
-                        var uluru = {lat: {{ address.map_latitude|unlocalize }}, lng: {{address.map_longitude|unlocalize}} };
-                        var map = new google.maps.Map(document.getElementById('map'), {
-                            zoom: 16,
-                            center: uluru
-                        });
-                        var marker = new google.maps.Marker({
-                            position: uluru,
-                            map: map
-                        });
-                    }
-                </script>
-                <script async defer
-                        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAYa8MyMcnM_agTuZe-2LdmWX9_X697JkI&callback=initMap">
-                </script>
+                {% if address.map_latitude or address.map_longitude %}
+                    <script>
+                        function initMap() {
+                            var uluru = {
+                                lat: {{ address.map_latitude|unlocalize }},
+                                lng: {{address.map_longitude|unlocalize}}
+                            };
+                            var map = new google.maps.Map(document.getElementById('map'), {
+                                zoom: 16,
+                                center: uluru
+                            });
+                            var marker = new google.maps.Marker({
+                                position: uluru,
+                                map: map
+                            });
+                        }
+                    </script>
+                    <script async defer
+                            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAYa8MyMcnM_agTuZe-2LdmWX9_X697JkI&callback=initMap">
+                    </script>
+                {% endif %}
             </div>
         </section>
     </div>

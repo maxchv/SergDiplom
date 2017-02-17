@@ -104,12 +104,13 @@ $(function () {
     function update_menu(menu) {
         console.dir(menu);
         var mainNav = $("#mainNav");
-        mainNav.find("li:last-child").remove();
+        var enter = mainNav.find("#enter").parent();
         for (var i = 0; i < menu.length; i++) {
             // <span style="cursor: pointer" id="btn-orders" class="scroll-link">Мои заказы</span>
-            mainNav.append('<li><span data-link="' + menu[i].link + '" style="cursor: pointer" id="' + menu[i].id + '" class="scroll-link">' + menu[i].title + '</a></li>');
+            $('<li><span data-link="' + menu[i].link + '" style="cursor: pointer" id="' + menu[i].id + '" class="scroll-link">' + menu[i].title + '</a></li>').insertBefore(enter);
         }
-        mainNav.append('<li><a href="/logout/" class="scroll-link new-link">Выход</a></li>');
+        $('<li><a href="/logout/" class="scroll-link new-link">Выход</a></li>').insertBefore(enter);
+        enter.remove();
         btn_orders();
         btn_panel_admin();
     }

@@ -2725,3 +2725,8 @@ section#experience {
     height: 100px;
     /*line-height: 100px;*/
 }
+.navStyle ul li:last-child,
+.navStyle ul li {
+    display: inline-block;
+    margin: 0;
+}
