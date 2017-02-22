@@ -67,6 +67,7 @@ $(function () {
             enter.remove();
             btn_orders();
             btn_panel_admin();
+            btn_feedback() ;
         }
     }
 
@@ -133,7 +134,7 @@ $(function () {
         $('#form-feedback'),
         function () {
             return {
-                'csrfmiddlewaretoken': $('#form-feedback').find("input[name=csrfmiddlewaretoken]").val(),
+                //'csrfmiddlewaretoken': $('#form-feedback').find("input[name=csrfmiddlewaretoken]").val(),
                 'title': $('#form-feedback').find("input[name=title]").val(),
                 'message': $('#form-feedback').find('textarea[name=message]').val()
             }
@@ -163,7 +164,7 @@ $(function () {
         $('#form-order'),
         function () {
             return {
-                'csrfmiddlewaretoken': $('#form-order').find("input[name=csrfmiddlewaretoken]").val(),
+                //'csrfmiddlewaretoken': $('#form-order').find("input[name=csrfmiddlewaretoken]").val(),
                 'datetime': $('#form-order').find("input[name=datetime]").val(),
                 'phone': $('#form-order').find("input[name=phone]").val(),
                 'master': $('#form-order').find("select[name=master]").val()
@@ -194,7 +195,7 @@ $(function () {
         $('#form-register'),
         function () {
             return {
-                'csrfmiddlewaretoken': $('#form-register').find("input[name=csrfmiddlewaretoken]").val(),
+                //'csrfmiddlewaretoken': $('#form-register').find("input[name=csrfmiddlewaretoken]").val(),
                 'username': $('#form-register').find("input[name=username]").val(),
                 'password1': $('#form-register').find("input[name=password1]").val(),
                 'password2': $('#form-register').find("input[name=password1]").val(),
@@ -225,7 +226,7 @@ $(function () {
         $('#form-login'),
         function () {
             return {
-                'csrfmiddlewaretoken': $('#form-login').find("input[name=csrfmiddlewaretoken]").val(),
+                //'csrfmiddlewaretoken': $('#form-login').find("input[name=csrfmiddlewaretoken]").val(),
                 'username': $('#form-login').find("input[name=username]").val(),
                 'password': $('#form-login').find("input[name=password]").val()
             }
