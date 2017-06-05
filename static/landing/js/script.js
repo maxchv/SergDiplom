@@ -1,7 +1,7 @@
 $(function () {
     $("#enter").click(function () {
         // форма входа
-        form_down($("#login"));
+        //form_down($("#login"));
     });
 
     function btn_orders() {
@@ -67,7 +67,7 @@ $(function () {
             enter.remove();
             btn_orders();
             btn_panel_admin();
-            btn_feedback() ;
+            btn_feedback();
         }
     }
 
@@ -239,14 +239,17 @@ $(function () {
             $('#login').animate({'height': '295px'});
             if (data.status == 'ok') {
                 update_menu(data.menu);
-                setTimeout(function () {
-                    form_up($('#login'));
-                    $("#background").fadeOut(1200);
-                    // clean data
-                    $('#form-login').find("input[name=password]").val('');
-                    output.empty();
-                    $('#login').css({'height': '250px'});
-                }, 2000);
+                $("#dlg-login").modal("hide");
+                $('#form-login').find("input[name=password]").val('');
+
+                // setTimeout(function () {
+                //     //form_up($('#login'));
+                //     //$("#background").fadeOut(1200);
+                //     // clean data
+                //     $('#form-login').find("input[name=password]").val('');
+                //     output.empty();
+                //     //$('#login').css({'height': '250px'});
+                // }, 2000);
             }
         }
     );

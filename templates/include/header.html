@@ -34,7 +34,9 @@
                             {% endif %}
                             <li><a href="{% url "landing_logout" %}" class="scroll-link new-link">Выход</a></li>
                         {% else %}
-                            <li><span style="cursor:pointer" id="enter" class="scroll-link">Вход</span></li>
+                            <li>
+                                <span style="cursor:pointer" id="enter" type="button" class="scroll-link" data-toggle="modal" data-target="#dlg-login">Вход</span>
+                            </li>
                         {% endif %}
                         {% if address.vk %}
                             <li class="social">
