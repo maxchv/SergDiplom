@@ -1,37 +1,4 @@
 $(function () {
-    $("#enter").click(function () {
-        // форма входа
-        //form_down($("#login"));
-    });
-
-    function btn_orders() {
-        $("#btn-orders").click(function () {
-            //order_down();
-            form_down($("#order"));
-        });
-    }
-
-    btn_orders();
-
-    // форма регистрации
-    $("#btn-form-register").click(function () {
-        //register_down();
-        form_up($("#login"));
-        form_down($("#register"), 1200, 700);
-    });
-
-    // клик по фону
-    $("#background").click(function () {
-        $(this).fadeOut(1200);
-        //login_up();
-        form_up($('#login'));
-        //register_up();
-        form_up($('#register'));
-        //order_up();
-        form_up($('#order'));
-        form_up($('#feedback'));
-    });
-
     // using jQuery
     function getCookie(name) {
         var cookieValue = null;
@@ -60,50 +27,13 @@ $(function () {
             var mainNav = $("#mainNav");
             var enter = mainNav.find("#enter").parent();
             for (var i = 0; i < menu.length; i++) {
-                // <span style="cursor: pointer" id="btn-orders" class="scroll-link">Мои заказы</span>
-                $('<li><span data-link="' + menu[i].link + '" style="cursor: pointer" id="' + menu[i].id + '" class="scroll-link">' + menu[i].title + '</a></li>').insertBefore(enter);
+                //<span style="cursor: pointer" id="btn-feedback" class="scroll-link" data-toggle="modal" data-target="#dlg-feedback">Мои отзывы</span>
+                //<span style="cursor: pointer" id="btn-orders" class="scroll-link" data-toggle="modal" data-target="#dlg-order">Заказать</span>
+                $('<li><span data-target="' + menu[i].target + '" data-toggle="modal" style="cursor: pointer" id="' + menu[i].id + '" class="scroll-link">' + menu[i].title + '</span></li>').insertBefore(enter);
             }
             $('<li><a href="/logout/" class="scroll-link new-link">Выход</a></li>').insertBefore(enter);
             enter.remove();
-            btn_orders();
-            btn_panel_admin();
-            btn_feedback();
         }
-    }
-
-    function btn_panel_admin() {
-        $("#btn-admin-panel").click(function () {
-            window.location = $(this).attr('data-link');
-        });
-    }
-
-    btn_panel_admin();
-
-    function form_down(form, time, delay, top) {
-        var time = time || 1200;
-        var delay = delay || 0;
-        var top = top || "200px";
-        $('#background').delay(delay).fadeIn(time);
-        form.show().delay(delay).animate({top: top}, time, function () {
-            form.find('input:nth-of-type(2)').focus();
-        });
-    }
-
-    function btn_feedback() {
-        $("#btn-feedback").click(function () {
-            form_down($("#feedback"));
-        });
-    }
-
-    btn_feedback();
-
-    function form_up(form, time, top, delay) {
-        var time = time || 1200;
-        var top = top || '-500px';
-        var delay = delay || 0;
-        form.delay(delay).animate({top: top}, time, function () {
-            form.hide();
-        });
     }
 
     function process_form(form, get_data, callback) {
@@ -134,8 +64,7 @@ $(function () {
         $('#form-feedback'),
         function () {
             return {
-                //'csrfmiddlewaretoken': $('#form-feedback').find("input[name=csrfmiddlewaretoken]").val(),
-                'title': $('#form-feedback').find("input[name=title]").val(),
+                'title':   $('#form-feedback').find("input[name=title]").val(),
                 'message': $('#form-feedback').find('textarea[name=message]').val()
             }
         },
@@ -144,16 +73,13 @@ $(function () {
             output.empty();
             output.append($.parseHTML(data.message));
             output.slideDown();
-            $('#feedback').animate({'height': '400px'});
             if (data.status == 'ok') {
                 setTimeout(function () {
-                    form_up($('#feedback'));
-                    $("#background").fadeOut(1200);
                     // clean data
                     $('#form-feedback').find('textarea[name=message]').val('');
                     $('#form-feedback').find("input[name=title]").val('');
                     output.empty();
-                    $('#feedback').css({'height': '350px'});
+                    $('#form-feedback').modal("hide");
                 }, 2000);
             }
         }
@@ -164,7 +90,6 @@ $(function () {
         $('#form-order'),
         function () {
             return {
-                //'csrfmiddlewaretoken': $('#form-order').find("input[name=csrfmiddlewaretoken]").val(),
                 'datetime': $('#form-order').find("input[name=datetime]").val(),
                 'phone': $('#form-order').find("input[name=phone]").val(),
                 'master': $('#form-order').find("select[name=master]").val()
@@ -175,16 +100,13 @@ $(function () {
             output.empty();
             output.append($.parseHTML(data.message));
             output.slideDown();
-            $('#order').animate({'height': '360px'});
             if (data.status == 'ok') {
                 setTimeout(function () {
-                    form_up($('#order'));
-                    $("#background").fadeOut(1200);
                     // clean data
                     $('#form-order').find("input[name=datetime]").val('');
                     $('#form-order').find("select[name=master]").val('');
+                    $('#form-order').modal('hide');
                     output.empty();
-                    $('#order').css({'height': '320px'});
                 }, 2000);
             }
         }
@@ -206,17 +128,15 @@ $(function () {
             output.empty();
             output.append($.parseHTML(data.message.replace("__all__", '')));
             output.slideDown();
-            $('#register').animate({'height': '460px'});
             if (data.status == 'ok') {
                 update_menu(data.menu);
                 setTimeout(function () {
-                    form_up($('#register'));
                     // clean data
                     $('#form-register').find("input[name=password1]").val('');
                     $('#form-register').find("input[name=password2]").val('');
                     output.empty();
-                    $('#register').css({'height': '400px'});
-                    form_down($('#login'), 1200, 700);
+                    $("#dlg-register").modal("hide");
+                    $("#dlg-login").modal("show");
                 }, 2000);
             }
         }
@@ -226,7 +146,6 @@ $(function () {
         $('#form-login'),
         function () {
             return {
-                //'csrfmiddlewaretoken': $('#form-login').find("input[name=csrfmiddlewaretoken]").val(),
                 'username': $('#form-login').find("input[name=username]").val(),
                 'password': $('#form-login').find("input[name=password]").val()
             }
@@ -236,20 +155,10 @@ $(function () {
             output.empty();
             output.append($.parseHTML(data.message.replace("__all__", '')));
             output.slideDown();
-            $('#login').animate({'height': '295px'});
             if (data.status == 'ok') {
                 update_menu(data.menu);
                 $("#dlg-login").modal("hide");
                 $('#form-login').find("input[name=password]").val('');
-
-                // setTimeout(function () {
-                //     //form_up($('#login'));
-                //     //$("#background").fadeOut(1200);
-                //     // clean data
-                //     $('#form-login').find("input[name=password]").val('');
-                //     output.empty();
-                //     //$('#login').css({'height': '250px'});
-                // }, 2000);
             }
         }
     );

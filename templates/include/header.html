@@ -27,24 +27,27 @@
                                     </span>
                                 </li>
                             {% else %}
-                                <li><span style="cursor: pointer" id="btn-orders" class="scroll-link">Заказать</span>
+                                <li>
+                                    <span style="cursor: pointer" id="btn-orders" class="scroll-link"
+                                          data-toggle="modal" data-target="#dlg-order">Заказать</span>
                                 </li>
                                 <li><span style="cursor: pointer" id="btn-feedback"
-                                          class="scroll-link">Мои отзывы</span></li>
+                                          class="scroll-link" data-toggle="modal" data-target="#dlg-feedback">Мои отзывы</span></li>
                             {% endif %}
                             <li><a href="{% url "landing_logout" %}" class="scroll-link new-link">Выход</a></li>
                         {% else %}
                             <li>
-                                <span style="cursor:pointer" id="enter" type="button" class="scroll-link" data-toggle="modal" data-target="#dlg-login">Вход</span>
+                                <span style="cursor:pointer" id="enter" type="button" class="scroll-link"
+                                      data-toggle="modal" data-target="#dlg-login">Вход</span>
                             </li>
                         {% endif %}
-                        {% if address.vk %}
-                            <li class="social">
-                                <a class="btn btn-block btn-social btn-vk" href="{{ address.vk }}" title="Вконтакте">
-                                    <span class="fa fa-vk"></span>
-                                </a>
-                            </li>
-                        {% endif %}
+{#                        {% if address.vk %}#}
+{#                            <li class="social">#}
+{#                                <a class="btn btn-block btn-social btn-vk" href="{{ address.vk }}" title="Вконтакте">#}
+{#                                    <span class="fa fa-vk"></span>#}
+{#                                </a>#}
+{#                            </li>#}
+{#                        {% endif %}#}
                         {% if  address.instagram %}
                             <li class="social">
                                 <a class="btn btn-block btn-social btn-instagram" href="{{ address.instagram }}"

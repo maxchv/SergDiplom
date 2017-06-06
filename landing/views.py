@@ -78,7 +78,8 @@ def login_ajax(request):
                                              {
                                                  'title': 'Админ панель',
                                                  'link': '/admin',
-                                                 'id': 'btn-admin-panel'
+                                                 'id': 'btn-admin-panel',
+                                                 'target': ''
                                              }
                                          ],
                                          'message': 'welcome superuser'})
@@ -88,12 +89,14 @@ def login_ajax(request):
                                              {
                                                  'title': 'Мои заказы',
                                                  'link': '#',
-                                                 'id': 'btn-orders'
+                                                 'id': 'btn-orders',
+                                                 'target': '#dlg-order'
                                              },
                                              {
                                                  'title': 'Мои отзывы',
                                                  'link': '#',
-                                                 'id': 'btn-feedback'
+                                                 'id': 'btn-feedback',
+                                                 'target': '#dlg-feedback'
                                              },
                                          ],
                                          'message': 'Добро пожаловать'})

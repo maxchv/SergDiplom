@@ -4,53 +4,51 @@
 {% load thumbnail %}
 {% block content %}
 
-    <div id="feedback" hidden>
-        <div class="form">
-            <form action="{% url 'orders:feedback_ajax' %}" method="post" id="form-feedback">
-                {% csrf_token %}
-                {{ feedback_form|crispy }}
-                <div class="output"></div>
-                <div>
-                    <button type="submit" class="btn btn-primary"
-                            id="btn-do-feedback">
-                        Сохранить
-                    </button>
+    <div class="modal fade" id="dlg-feedback" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Оставить отзыв</h4>
                 </div>
-            </form>
+                <form action="{% url 'orders:feedback_ajax' %}" method="post" id="form-feedback">
+                    <div class="modal-body">
+                        {% csrf_token %}
+                        {{ feedback_form|crispy }}
+                        <div class="output"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Сохранить</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 
-    {#    {% if user.is_authenticated %}#}
-    <div id="order" hidden>
-        <div class="form">
-            <form action="{% url 'orders:order_ajax' %}" method="post" id="form-order">
-                {% csrf_token %}
-                {{ order_form|crispy }}
-                <div class="output"></div>
-                <div>
-                    <button type="submit" class="btn btn-primary"
-                            id="btn-do-order">
-                        Заказать
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
-    {#    {% else %}#}
-    <div id="register" hidden>
-        <div class="form">
-            <form action="{% url 'registration_ajax' %}" method="post" id="form-register">
-                {% csrf_token %}
-                {{ register_form|crispy }}
-                <div class="output"></div>
-                <button type="submit" class="btn btn-primary"
-                        id="btn-register">
-                    Зарегистрироваться
-                </button>
-            </form>
-        </div>
-    </div>
 
+
+    <div class="modal fade" id="dlg-order" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Сделать заказ</h4>
+                </div>
+                <form action="{% url 'orders:order_ajax' %}" method="post" id="form-order">
+                    <div class="modal-body">
+                        {% csrf_token %}
+                        {{ order_form|crispy }}
+                        <div class="output"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Заказать</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
     <div class="modal fade" id="dlg-register" role="dialog">
         <div class="modal-dialog">
@@ -60,7 +58,7 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title">Регистрация</h4>
                 </div>
-                <form action="{% url 'login_ajax' %}" method="post" id="form-register">
+                <form action="{% url 'registration_ajax' %}" method="post" id="form-register">
                     <div class="modal-body">
                         {% csrf_token %}
                         {{ register_form|crispy }}
@@ -73,7 +71,6 @@
             </div>
         </div>
     </div>
-
 
     <div class="modal fade" id="dlg-login" role="dialog">
         <div class="modal-dialog">
@@ -91,7 +88,9 @@
                         <div class="output"></div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#dlg-register" data-dismiss="modal">Регистрация</button>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#dlg-register"
+                                data-dismiss="modal">Регистрация
+                        </button>
                         <button type="submit" class="btn btn-primary">Логин</button>
                     </div>
                 </form>
@@ -99,18 +98,6 @@
         </div>
     </div>
 
-{#    <div id="login" hidden>#}
-{#        <div class="form">#}
-{#            <form action="{% url 'login_ajax' %}" method="post" id="form-login">#}
-{#                {% csrf_token %}#}
-{#                {{ login_form|crispy }}#}
-{#                <div class="output"></div>#}
-{#                <button type="button" class="btn btn-primary" id="btn-form-register">Регистрация</button>#}
-{#                <button type="submit" class="btn btn-primary" id="btn-login">Логин</button>#}
-{#            </form>#}
-{#        </div>#}
-{#    </div>#}
-    {#    {% endif %}#}
     <div id="background"></div>
 
     {% include "include/carousel.html" %}
@@ -128,7 +115,5 @@
     {% include "include/feedback.html" %}
 
     {% include "include/contacts.html" %}
-
-
 
 {% endblock %}
